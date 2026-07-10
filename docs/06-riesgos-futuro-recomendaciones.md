@@ -40,9 +40,9 @@
 
 ## Integración
 
-- **Extensión VS Code / Cursor** que abra DevKit con contexto del archivo actual.
+- **Extensión VS Code / Cursor** que abra Devkit con contexto del archivo actual.
 - **Webhook interno** para generar scripts desde tickets Jira/Linear.
-- **CLI companion** para mismas funciones en terminal (`rubrika-devkit csv2sql`).
+- **CLI companion** para mismas funciones en terminal (`devkit csv2sql`).
 
 ## AI (con governance)
 
@@ -121,6 +121,6 @@ Antes de escribir la primera feature completa, debe estar listo:
 
 ## Conclusión
 
-Rubrika DevKit tiene potencial de convertirse en **infraestructura de productividad interna** si se mantiene disciplina modular y resistencia al scope creep. El MVP debe sentirse **completo pero pequeño**: pocas herramientas excelentes, no muchas a medias.
+Devkit tiene potencial de convertirse en **infraestructura de productividad interna** si se mantiene disciplina modular y resistencia al scope creep. El MVP debe sentirse **completo pero pequeño**: pocas herramientas excelentes, no muchas a medias.
 
 La documentación en `docs/` debe evolucionar con el producto. Cualquier cambio de alcance empieza por actualizar `02-mvp-roadmap-funcionalidades.md` y comunicar al equipo.

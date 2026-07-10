@@ -1,4 +1,4 @@
-# Rubrika DevKit — Documentación de producto
+# Devkit — Documentación de producto
 
 Documentación base del proyecto, definida antes del desarrollo funcional.
 
@@ -16,7 +16,7 @@ Documentación base del proyecto, definida antes del desarrollo funcional.
 
 ## Principios inmutables
 
-- Rubrika DevKit es una **suite de herramientas**, no un editor SQL.
+- Devkit es una **suite de herramientas**, no un editor SQL.
 - Cada herramienta resuelve **un problema específico** con el **menor número de clics** posible.
 - Arquitectura **Feature First** y **100 % modular**.
 - Stack: **Next.js, TypeScript, Tailwind CSS, shadcn/ui, Lucide Icons**.

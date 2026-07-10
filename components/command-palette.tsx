@@ -51,7 +51,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       >
         <DialogTitle className="sr-only">Buscar herramientas</DialogTitle>
         <DialogDescription className="sr-only">
-          Busca módulos y herramientas de Rubrika DevKit.
+          Busca módulos y herramientas de Devkit.
         </DialogDescription>
         <Command
           className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted [&_[cmdk-item]]:px-3 [&_[cmdk-item]]:py-2.5"

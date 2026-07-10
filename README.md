@@ -1,4 +1,4 @@
-# Rubrika DevKit
+# Devkit
 
 Suite interna de herramientas para desarrolladores de Rubrika.
 

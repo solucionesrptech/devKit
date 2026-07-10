@@ -13,8 +13,8 @@
 
 ### Marca
 
-- Logo Rubrika en sidebar.
-- Nombre producto: **Rubrika DevKit** (DevKit como subtítulo o sufijo).
+- Logo Devkit en sidebar.
+- Nombre producto: **Devkit**.
 - Colores corporativos **solo como acento**, nunca como fondo principal.
 
 ### Tipografía
@@ -156,7 +156,7 @@ Cada herramienta debe mostrar la **funcionalidad principal above the fold**: el 
 
 ### Flujo A — Usuario recurrente (Raycast-style)
 
-1. Abre DevKit → `⌘K`
+1. Abre Devkit → `⌘K`
 2. Escribe «excel» → Enter
 3. Pega datos → resultado instantáneo → Copiar
 

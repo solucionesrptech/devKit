@@ -11,13 +11,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Rubrika DevKit",
-    template: "%s · Rubrika DevKit",
+    default: "Devkit",
+    template: "%s · Devkit",
   },
   description:
     "Suite interna de herramientas para desarrolladores de Rubrika. Productividad, rapidez y confianza.",
   icons: {
-    icon: "/logo-rubrika-iso.svg",
+    icon: "/devkit.png",
   },
 };
 

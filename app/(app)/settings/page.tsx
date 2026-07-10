@@ -9,7 +9,7 @@ export default function SettingsPage() {
           Settings
         </h1>
         <p className="text-muted">
-          Configura tu experiencia en Rubrika DevKit.
+          Configura tu experiencia en Devkit.
         </p>
       </section>
 

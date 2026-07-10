@@ -42,12 +42,12 @@ export function Sidebar() {
             <Link href="/" className="flex min-w-0 items-center gap-2.5">
               <AppLogo />
               <span className="truncate text-xs font-semibold text-muted">
-                DevKit
+                Devkit
               </span>
             </Link>
           )}
           {collapsed && (
-            <Link href="/" aria-label="Rubrika DevKit" className="shrink-0">
+            <Link href="/" aria-label="Devkit" className="shrink-0">
               <div className="flex h-8 w-8 items-center overflow-hidden rounded-lg">
                 <AppLogo alt="" variant="mark" />
               </div>
@@ -123,7 +123,7 @@ export function Sidebar() {
           <div className="border-t border-border p-4">
             <div className="rounded-lg bg-rubrika-primary/10 p-3">
               <p className="text-xs font-medium text-rubrika-primary">
-                Rubrika DevKit
+                Devkit
               </p>
               <p className="mt-1 text-xs text-muted">
                 Suite interna de herramientas para desarrolladores.

@@ -2,7 +2,7 @@
 
 ## Visión
 
-**Rubrika DevKit** será la plataforma interna de productividad para el equipo técnico de Rubrika: un lugar único, rápido y confiable donde resolver tareas repetitivas de desarrollo y datos en segundos, no en minutos.
+**Devkit** será la plataforma interna de productividad para el equipo técnico de Rubrika: un lugar único, rápido y confiable donde resolver tareas repetitivas de desarrollo y datos en segundos, no en minutos.
 
 No compite con un IDE ni con un cliente SQL. Compite con el tiempo perdido en tareas manuales: copiar filas de Excel, armar un `IN (...)` de cien IDs, formatear un script sucio o comparar dos listas de RUT.
 
@@ -16,7 +16,7 @@ La plataforma debe sentirse como una herramienta que un desarrollador abre varia
 | Una sola suite en lugar de scripts dispersos | Conocimiento encapsulado y reutilizable |
 | Experiencia moderna y predecible | Base escalable para nuevas herramientas internas |
 
-## Qué NO es Rubrika DevKit
+## Qué NO es Devkit
 
 - No es un editor SQL ni un reemplazo de SSMS, Azure Data Studio o pgAdmin.
 - No es un ETL ni un sistema de migración de datos.
@@ -48,7 +48,7 @@ La plataforma debe sentirse como una herramienta que un desarrollador abre varia
 ## Objetivos de producto
 
 - Entregar un **MVP usable** con las herramientas de mayor impacto.
-- Lograr **adopción voluntaria** (que el equipo prefiera DevKit frente a Excel + Notepad).
+- Lograr **adopción voluntaria** (que el equipo prefiera Devkit frente a Excel + Notepad).
 - Mantener **time-to-add-tool** bajo: una nueva herramienta = días, no semanas.
 
 ## Objetivos técnicos

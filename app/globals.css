@@ -135,14 +135,6 @@ body {
   border-radius: 9999px;
 }
 
-.logo-rubrika {
+.logo-devkit {
   opacity: 0.95;
-}
-
-[data-theme="dark"] .logo-rubrika {
-  filter: brightness(0) invert(1);
-}
-
-[data-theme="light"] .logo-rubrika {
-  filter: none;
 }
