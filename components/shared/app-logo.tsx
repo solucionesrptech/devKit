@@ -13,13 +13,13 @@ function AppLogo({
 }: AppLogoProps) {
   return (
     <img
-      src="/devkit.png"
+      src="/devkit-mark.png"
       alt={alt}
-      width={185}
-      height={22}
+      width={96}
+      height={96}
       className={cn(
-        "logo-devkit block h-5 w-auto shrink-0",
-        variant === "mark" && "h-8 max-w-none object-left object-cover",
+        "logo-devkit block shrink-0 rounded-lg object-contain",
+        variant === "mark" ? "h-10 w-10" : "h-12 w-12",
         className,
       )}
     />

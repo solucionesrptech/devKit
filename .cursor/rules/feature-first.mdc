@@ -1,0 +1,30 @@
+---
+description: Arquitectura Feature First y límites de capas
+alwaysApply: true
+---
+
+# Feature First
+
+## Capas
+
+| Capa | Debe | No debe |
+|------|------|---------|
+| `app/` | Rutas, layouts, composición | Lógica de negocio, parsers, generadores |
+| `features/<id>/` | UI + `lib/` pura + tests + types | Conocer el shell más allá de shared |
+| `lib/config/` | Catálogo y presets | Implementar features |
+| `components/shared` | Patrones transversales de tools | Depender de una feature concreta |
+| `components/ui` | Primitivas shadcn/Radix | Copy de producto |
+
+## Nueva herramienta (checklist)
+
+1. `features/<tool-id>/` — page, `index.ts`, `lib/`, `__tests__/`, `types` si aplica.
+2. Registrar en `modules.ts` + `tool-pages.ts` (ver `tool-registry`).
+3. Reutilizar `ToolPageLayout`, `ToolPageHeader`, `ToolWorkspace`, `CopyButton`, etc.
+4. Tests de lógica pura. `ARCHITECTURE.md` solo si es compleja.
+
+## Límites
+
+- Arquitectura congelada: ver `architecture-freeze` (no rediseñar sin OK explícito).
+- No refactorizar el registry salvo pedido explícito.
+- No cambiar funcionalidad fuera del alcance de la tarea.
+- Sin backend de negocio en el Core offline; sin enviar datos pegados a servicios externos.

@@ -17,9 +17,9 @@ Componentes: `sql-in-clause-form.tsx`, `generate-select.ts`, `generate-delete.ts
 
 #### DELETE físico vs borrado lógico
 
-- **Borrado lógico:** usar **UPDATE** sobre la columna `Eliminado` (u otra columna de estado). Es el flujo recomendado.
+- **Borrado lógico:** usar **UPDATE** sobre la columna `is_deleted` (u otra columna de estado). Es el flujo recomendado.
 - **DELETE:** borrado **físico** permanente. Permanece disponible pero no se promueve como operación principal.
-- La UI muestra una nota al seleccionar DELETE: *"Para borrado lógico usa UPDATE sobre la columna Eliminado."*
+- La UI muestra una nota al seleccionar DELETE: *"Para borrado lógico usa UPDATE sobre la columna is_deleted."*
 
 ### UPDATE (formulario dedicado)
 
@@ -58,13 +58,13 @@ Hoy el SET es global (`assignments[]` único), por lo que en modo Automático si
 
 ```sql
 -- 3 registros · UPDATE masivo (WHERE IN)
-UPDATE Usuarios
+UPDATE users
 SET
-    deshabilitado = 1
-WHERE usuarioid IN (
-    '5295204-2',
-    '5934202-9',
-    '6301929-1'
+    is_locked = 1
+WHERE id IN (
+    'user-003',
+    'user-004',
+    'user-005'
 );
 ```
 
@@ -72,17 +72,17 @@ WHERE usuarioid IN (
 
 ```sql
 -- 2 registros · UPDATE individual
-UPDATE Usuarios
+UPDATE users
 SET
-    ultimavez = NULL,
-    bloqueado = 0
-WHERE usuarioid = '14475488-3';
+    last_login = NULL,
+    is_locked = 0
+WHERE id = 'user-001';
 
-UPDATE Usuarios
+UPDATE users
 SET
-    ultimavez = NULL,
-    bloqueado = 0
-WHERE usuarioid = '11111111-1';
+    last_login = NULL,
+    is_locked = 0
+WHERE id = 'user-002';
 ```
 
 El preview muestra el tipo de generación: `UPDATE masivo (WHERE IN)` o `UPDATE individual`.

@@ -6,19 +6,19 @@ import { validateUpdateInput } from "../lib/validate-update-input";
 import type { SqlUpdateInput } from "../types";
 
 const baseAssignments: SqlUpdateInput["assignments"] = [
-  { column: "ultimavez", value: "", dataType: "null" },
-  { column: "bloqueado", value: "0", dataType: "number" },
+  { column: "last_login", value: "", dataType: "null" },
+  { column: "is_locked", value: "0", dataType: "number" },
   { column: "intentosLogin", value: "0", dataType: "number" },
   { column: "cambiarclave", value: "0", dataType: "number" },
-  { column: "deshabilitado", value: "0", dataType: "number" },
+  { column: "is_locked", value: "0", dataType: "number" },
 ];
 
 const baseInput: SqlUpdateInput = {
   dialect: "sqlserver",
-  table: "Usuarios",
-  whereColumn: "usuarioid",
+  table: "users",
+  whereColumn: "id",
   whereDataType: "text",
-  whereValues: ["14475488-3"],
+  whereValues: ["user-001"],
   assignments: baseAssignments,
   generationMode: "auto",
 };
@@ -52,8 +52,8 @@ describe("validateUpdateInput", () => {
     expect(
       validateUpdateInput({
         assignments: [
-          { column: "bloqueado", value: "0", dataType: "number" },
-          { column: "bloqueado", value: "1", dataType: "number" },
+          { column: "is_locked", value: "0", dataType: "number" },
+          { column: "is_locked", value: "1", dataType: "number" },
         ],
         whereValues: ["1"],
         whereDataType: "number",
@@ -70,15 +70,15 @@ describe("generateUpdate", () => {
     expect(statementCount).toBe(1);
     expect(sql).toBe(
       `-- 1 registros · UPDATE masivo (WHERE IN)
-UPDATE Usuarios
+UPDATE users
 SET
-    ultimavez = NULL,
-    bloqueado = 0,
+    last_login = NULL,
+    is_locked = 0,
     intentosLogin = 0,
     cambiarclave = 0,
-    deshabilitado = 0
-WHERE usuarioid IN (
-'14475488-3'
+    is_locked = 0
+WHERE id IN (
+'user-001'
 );`,
     );
   });
@@ -86,8 +86,8 @@ WHERE usuarioid IN (
   it("genera un único UPDATE con WHERE IN en modo auto", () => {
     const input: SqlUpdateInput = {
       ...baseInput,
-      whereValues: ["14475488-3", "11111111-1", "22222222-2"],
-      assignments: [{ column: "deshabilitado", value: "1", dataType: "number" }],
+      whereValues: ["user-001", "user-002", "user-003"],
+      assignments: [{ column: "is_locked", value: "1", dataType: "number" }],
     };
 
     const { sql, generationType, statementCount } = generateUpdate(input);
@@ -95,18 +95,18 @@ WHERE usuarioid IN (
     expect(generationType).toBe("bulk");
     expect(statementCount).toBe(1);
     expect(sql).toContain("-- 3 registros · UPDATE masivo (WHERE IN)");
-    expect(sql).toContain("WHERE usuarioid IN (");
-    expect(sql).toContain("'14475488-3'");
-    expect(sql).toContain("'11111111-1'");
-    expect(sql).toContain("'22222222-2'");
-    expect(sql.match(/UPDATE Usuarios/g)?.length).toBe(1);
+    expect(sql).toContain("WHERE id IN (");
+    expect(sql).toContain("'user-001'");
+    expect(sql).toContain("'user-002'");
+    expect(sql).toContain("'user-003'");
+    expect(sql.match(/UPDATE users/g)?.length).toBe(1);
   });
 
   it("genera una sentencia por valor WHERE en modo per-row", () => {
     const input: SqlUpdateInput = {
       ...baseInput,
       generationMode: "per-row",
-      whereValues: ["14475488-3", "11111111-1", "22222222-2"],
+      whereValues: ["user-001", "user-002", "user-003"],
     };
 
     const { sql, generationType, statementCount } = generateUpdate(input);
@@ -114,17 +114,17 @@ WHERE usuarioid IN (
     expect(generationType).toBe("individual");
     expect(statementCount).toBe(3);
     expect(sql).toContain("-- 3 registros · UPDATE individual");
-    expect(sql).toContain("WHERE usuarioid = '14475488-3';");
-    expect(sql).toContain("WHERE usuarioid = '11111111-1';");
-    expect(sql).toContain("WHERE usuarioid = '22222222-2';");
-    expect(sql.match(/UPDATE Usuarios/g)?.length).toBe(3);
+    expect(sql).toContain("WHERE id = 'user-001';");
+    expect(sql).toContain("WHERE id = 'user-002';");
+    expect(sql).toContain("WHERE id = 'user-003';");
+    expect(sql.match(/UPDATE users/g)?.length).toBe(3);
   });
 
   it("escapa comillas en cláusula IN", () => {
     const input: SqlUpdateInput = {
       ...baseInput,
       whereValues: ["O'Brien"],
-      assignments: [{ column: "deshabilitado", value: "1", dataType: "number" }],
+      assignments: [{ column: "is_locked", value: "1", dataType: "number" }],
     };
 
     const { sql } = generateUpdate(input);
@@ -136,14 +136,14 @@ WHERE usuarioid IN (
       ...baseInput,
       generationMode: "per-row",
       table: "Mi Tabla",
-      whereColumn: "[usuarioid]",
+      whereColumn: "[id]",
       assignments: [{ column: "[estado]", value: "2", dataType: "number" }],
     };
 
     const { sql } = generateUpdate(input);
     expect(sql).toContain("UPDATE Mi Tabla");
     expect(sql).toContain("    [estado] = 2");
-    expect(sql).toContain("WHERE [usuarioid] = '14475488-3';");
+    expect(sql).toContain("WHERE [id] = 'user-001';");
   });
 
   it("produce el mismo SQL para postgresql en MVP", () => {

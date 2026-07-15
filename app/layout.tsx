@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     template: "%s · Devkit",
   },
   description:
-    "Suite interna de herramientas para desarrolladores de Rubrika. Productividad, rapidez y confianza.",
+    "Suite de herramientas para desarrollo y productividad. Rapidez, claridad y confianza.",
   icons: {
-    icon: "/devkit.png",
+    icon: "/devkit-mark.png",
   },
 };
 

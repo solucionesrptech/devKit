@@ -1,0 +1,30 @@
+---
+description: Diseño de herramientas — una tarea, especializadas, offline
+alwaysApply: true
+---
+
+# Diseño de herramientas
+
+Complementa `product-vision` (dominio / tarea / necesidad real).
+
+## Forma de la tool
+
+- Nombre = job del usuario (“PDF → Base64”, “Text Cleaner”), no hub ambiguo (“Base64 Studio”).
+- Una entrada principal, una acción, un resultado revisable antes de copiar/descargar.
+- Visualmente independientes; lógica compartida solo en `lib` interna.
+- Offline / cliente primero. Status honesto (ver `tool-registry`).
+- Reutilizar shared UI antes de crear componentes nuevos.
+- Microcopy en español, errores accionables.
+
+## Fronteras rápidas
+
+| Tarea | Dominio |
+|-------|---------|
+| Scripts SQL offline | SQL Tools |
+| Diff / comparar | Compare |
+| Codificar / decodificar | Encoding |
+| Limpiar texto/listas | Text Tools |
+| Transformar formatos | Data Tools |
+| Utilidad de desarrollo | Developer Tools |
+| BD real conectada | Database (futuro, no Core) |
+| Conector vendor/cloud | Plugin opcional, fuera del Core |

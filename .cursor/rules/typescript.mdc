@@ -1,0 +1,16 @@
+---
+description: TypeScript y React — convenciones del proyecto DevKit
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript / React
+
+- TypeScript estricto; evitar `any`.
+- Imports con alias `@/`.
+- Componentes de función. Client Components solo con estado, efectos o APIs del navegador.
+- Lógica pura (parsers, generadores, diffs, validaciones) en `features/<id>/lib/` — testeable sin DOM.
+- Tipos de dominio en `features/<id>/types.ts`.
+- No añadir `useMemo` / `useCallback` por defecto; usar solo con coste real.
+- Listas pesadas: `useDeferredValue` o debounce existente.
+- Naming: feature kebab-case; page `*Page`; funciones lib camelCase verbos.

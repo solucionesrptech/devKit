@@ -1,0 +1,13 @@
+---
+description: Identidad DevKit — sin branding ni referencias a marcas anteriores
+alwaysApply: true
+---
+
+# Identidad DevKit
+
+- El producto oficial es **DevKit**. No usar branding, textos, assets, claves o presets de otras marcas.
+- Tokens CSS: `--devkit-*` / clases `*-devkit-*`. Temas Monaco: `devkit-dark` / `devkit-light`.
+- Persistencia: claves `devkit-*`. Si existe una clave legacy, migrar una vez y dejar de escribirla.
+- Assets solo en `public/devkit*`. Placeholders: `DevKit User` / `user@devkit.local`.
+- Presets y fixtures SQL: tablas genéricas (`users`, `employees`, `customers`, `documents`, `orders`).
+- No crear carpetas `legacy-*`. El historial está en Git.

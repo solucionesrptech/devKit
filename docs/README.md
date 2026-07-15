@@ -6,8 +6,9 @@ Documentación base del proyecto, definida antes del desarrollo funcional.
 
 | # | Documento | Contenido |
 |---|-----------|-----------|
+| — | [**DEVKIT_VISION**](./DEVKIT_VISION.md) | Visión oficial aprobada (dominios, Workspace, Core vs plugins) |
 | — | [Decisiones abiertas](./00-decisiones-abiertas.md) | Preguntas pendientes de validación |
-| 1–2 | [Visión y objetivos](./01-vision-y-objetivos.md) | Visión del producto y objetivos del proyecto |
+| 1–2 | [Visión y objetivos](./01-vision-y-objetivos.md) | Visión histórica / objetivos del proyecto (complementa DEVKIT_VISION) |
 | 3–5, 19 | [MVP, roadmap y alcance](./02-mvp-roadmap-funcionalidades.md) | Alcance MVP, versiones, priorización y exclusiones |
 | 6–8, 11–13 | [Arquitectura](./03-arquitectura.md) | Arquitectura, carpetas, estrategia modular, decisiones técnicas |
 | 9, 17–18 | [Diseño UX y navegación](./04-diseno-ux-navegacion.md) | Guía UI/UX, flujo de navegación, componentes base |
@@ -16,12 +17,14 @@ Documentación base del proyecto, definida antes del desarrollo funcional.
 
 ## Principios inmutables
 
-- Devkit es una **suite de herramientas**, no un editor SQL.
-- Cada herramienta resuelve **un problema específico** con el **menor número de clics** posible.
-- Arquitectura **Feature First** y **100 % modular**.
+Fuente de verdad de producto: [`DEVKIT_VISION.md`](./DEVKIT_VISION.md).
+
+- DevKit es una **plataforma** (catálogo + Workspace), no un editor SQL.
+- **Categoría = dominio**; **herramienta = tarea**; crecimiento por **necesidad real**.
+- Arquitectura **Feature First** y Core pequeño; vendors = plugins opcionales.
 - Stack: **Next.js, TypeScript, Tailwind CSS, shadcn/ui, Lucide Icons**.
-- **Sin Bootstrap**. Dark mode por defecto. Identidad visual Rubrika.
-- **Sin backend en v1**, salvo necesidad estricta.
+- **Sin Bootstrap**. Dark mode por defecto. Identidad visual DevKit.
+- **Sin backend en el Core offline**, salvo necesidad estricta / capa conectada futura.
 
 ## Mantenimiento de esta documentación
 

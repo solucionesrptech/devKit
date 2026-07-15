@@ -1,0 +1,14 @@
+---
+description: Convenciones de estilo CSS y tokens DevKit
+globs: "**/*.{css,tsx}"
+alwaysApply: false
+---
+
+# Estilos DevKit
+
+- Usar tokens `--devkit-*` y clases Tailwind `text-devkit-*`, `bg-devkit-*`, `border-devkit-*`.
+- No estilos en línea.
+- No usar `!important`.
+- Tema vía `data-theme` en `<html>` (dark por defecto).
+- Cambios de tokens: actualizar `globals.css` y todas las clases relacionadas.
+- Patrones de layout de tools: ver `frontend-ui`.

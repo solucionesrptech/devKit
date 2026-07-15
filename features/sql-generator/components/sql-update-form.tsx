@@ -175,7 +175,7 @@ function SqlUpdateForm({
               id="update-where-column"
               value={whereColumn}
               onChange={(e) => onWhereColumnChange(e.target.value)}
-              placeholder="usuarioid"
+              placeholder="id"
             />
           ) : (
             <Select value={whereColumn} onValueChange={onWhereColumnChange}>

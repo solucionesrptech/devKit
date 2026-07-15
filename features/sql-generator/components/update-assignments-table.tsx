@@ -71,7 +71,7 @@ function UpdateAssignmentsTable({
                         onChange={(e) =>
                           onRowChange(row.id, { column: e.target.value })
                         }
-                        placeholder="bloqueado"
+                        placeholder="is_locked"
                         aria-label="Columna SET"
                       />
                     ) : (

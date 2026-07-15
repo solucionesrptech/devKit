@@ -1,0 +1,14 @@
+---
+description: Procesamiento local de archivos — offline, sin subir datos
+globs: "**/features/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Procesamiento de archivos
+
+- Procesar archivos y datos pegados **en el cliente**. No enviar contenido a APIs externas en el Core.
+- Excel/CSV: librería ya usada (`xlsx`); preferir dynamic import si el bundle crece.
+- PDF/imagen/Base64: tools especializadas por tarea; compartir helpers internos si aplica.
+- Validar tipo/tamaño; mensajes de error claros en español.
+- No persistir el contenido del archivo en `localStorage` ni telemetría.
+- Dependencias nuevas solo con necesidad justificada; evitar libs “por si acaso”.

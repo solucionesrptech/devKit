@@ -102,7 +102,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Check className="h-4 w-4 text-rubrika-primary" />
+          <Check className="h-4 w-4 text-devkit-primary" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -125,7 +125,7 @@ function DropdownMenuRadioItem({
     >
       <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Circle className="h-2 w-2 fill-rubrika-primary text-rubrika-primary" />
+          <Circle className="h-2 w-2 fill-devkit-primary text-devkit-primary" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}

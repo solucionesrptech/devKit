@@ -13,15 +13,15 @@ import {
 } from "../types";
 
 const baseAssignments: SqlUpdateInput["assignments"] = [
-  { column: "deshabilitado", value: "1", dataType: "number" },
+  { column: "is_locked", value: "1", dataType: "number" },
 ];
 
 const baseInput: SqlUpdateInput = {
   dialect: "sqlserver",
-  table: "Usuarios",
-  whereColumn: "usuarioid",
+  table: "users",
+  whereColumn: "id",
   whereDataType: "text",
-  whereValues: ["14475488-3", "11111111-1"],
+  whereValues: ["user-001", "user-002"],
   assignments: baseAssignments,
   generationMode: "auto",
 };
@@ -31,10 +31,10 @@ describe("formatValidationSelect", () => {
     const sql = formatValidationSelect(baseInput);
 
     expect(sql).toBe(`SELECT *
-FROM Usuarios
-WHERE usuarioid IN (
-'14475488-3',
-'11111111-1'
+FROM users
+WHERE id IN (
+'user-001',
+'user-002'
 );`);
   });
 });
@@ -63,8 +63,8 @@ describe("buildUpdateValidationBlocks", () => {
     );
 
     expect(blocks?.preSelect).not.toContain("GO");
-    expect(blocks?.preSelect).not.toContain("UPDATE Usuarios");
-    expect(blocks?.preSelect).toMatch(/SELECT \*\s*\nFROM Usuarios/);
+    expect(blocks?.preSelect).not.toContain("UPDATE users");
+    expect(blocks?.preSelect).toMatch(/SELECT \*\s*\nFROM users/);
   });
 
   it("bloque update no contiene VALIDACIÓN PREVIA", () => {
@@ -76,7 +76,7 @@ describe("buildUpdateValidationBlocks", () => {
     );
 
     expect(blocks?.update).not.toContain("VALIDACIÓN PREVIA");
-    expect(blocks?.update).toContain("UPDATE Usuarios");
+    expect(blocks?.update).toContain("UPDATE users");
   });
 
   it("previo y posterior tienen banners distintos", () => {
@@ -137,7 +137,7 @@ describe("composeUpdateValidationScript", () => {
     expect(result).not.toContain("VALIDACIÓN POSTERIOR");
     expect(result).toContain("\n\nGO\n\n");
     expect(result).toContain("-- 2 registros · UPDATE masivo (WHERE IN)");
-    expect(result).toMatch(/SELECT \*\s*\nFROM Usuarios[\s\S]*WHERE usuarioid IN/);
+    expect(result).toMatch(/SELECT \*\s*\nFROM users[\s\S]*WHERE id IN/);
   });
 
   it("solo UPDATE devuelve sql sin banners", () => {
@@ -174,7 +174,7 @@ describe("composeUpdateValidationScript", () => {
 
     expect(result).toContain("VALIDACIÓN PREVIA");
     expect(result).not.toContain("-- UPDATE");
-    expect(result).not.toContain("UPDATE Usuarios");
+    expect(result).not.toContain("UPDATE users");
   });
 
   it("ningún bloque activo retorna null", () => {
@@ -212,8 +212,8 @@ describe("composeUpdateValidationScript", () => {
       DEFAULT_UPDATE_VALIDATION_OPTIONS,
     );
 
-    expect(result).toContain("WHERE usuarioid IN (");
+    expect(result).toContain("WHERE id IN (");
     expect(result).toContain("-- 2 registros · UPDATE individual");
-    expect(result!.match(/UPDATE Usuarios/g)?.length).toBe(2);
+    expect(result!.match(/UPDATE users/g)?.length).toBe(2);
   });
 });

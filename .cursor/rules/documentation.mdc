@@ -1,0 +1,15 @@
+---
+description: Documentación de producto y features en docs/
+globs: "**/docs/**/*.md"
+alwaysApply: false
+---
+
+# Documentación
+
+- Visión oficial: `docs/DEVKIT_VISION.md` — no contradecirla en otros docs.
+- Arquitectura base congelada: no cambiar categorías, filosofía, arquitectura, catálogo, Workspace, contrato del registry ni reglas Cursor sin aprobación (ver `architecture-freeze`).
+- Docs de producto en `docs/`; actualizar si cambia arquitectura, categorías o convenciones **y** hubo OK explícito.
+- Features complejas: `features/<id>/ARCHITECTURE.md` (comportamiento, no marketing).
+- Fronteras de dominio: seguir `DEVKIT_VISION` / `product-vision` (no repetir listas largas aquí).
+- No inventar tools o categorías fuera de la visión/roadmap aprobado.
+- Ejemplos con datos genéricos (identidad: ver `devkit-identity`).

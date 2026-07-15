@@ -1,0 +1,20 @@
+---
+description: Workspace — capacidad transversal, no categoría ni registry
+alwaysApply: true
+---
+
+# Workspace
+
+Workspace es una **capacidad transversal** de productividad. No es categoría de tools ni entrada del Tool Registry.
+
+## Capacidades
+
+Favoritos · Recientes · Historial · Colecciones · Pines
+
+## Reglas
+
+- Implementar Workspace en shell/dashboard/persistencia local (`devkit-*`), no como módulo en `modules.ts`.
+- No inventar una categoría “Workspace” en el catálogo.
+- Favoritos/recientes deben reflejar uso real (no mocks permanentes) cuando se implemente persistencia.
+- No persistir contenido sensible pegado por el usuario; solo metadatos de uso (`tool_id`, timestamps).
+- Dashboard: priorizar continuar trabajo (recientes/favoritos) sobre listar información redundante.

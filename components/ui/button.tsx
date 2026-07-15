@@ -10,16 +10,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-rubrika-primary text-white shadow-sm hover:bg-rubrika-primary/90 active:scale-[0.98]",
+          "bg-devkit-primary text-white shadow-sm hover:bg-devkit-primary/90 active:scale-[0.98]",
         accent:
-          "bg-rubrika-accent text-rubrika-neutral shadow-sm hover:bg-rubrika-accent/90 active:scale-[0.98]",
+          "bg-devkit-accent text-devkit-neutral shadow-sm hover:bg-devkit-accent/90 active:scale-[0.98]",
         secondary:
           "bg-card text-foreground border border-border hover:bg-card-hover active:scale-[0.98]",
         ghost:
           "text-muted hover:text-foreground hover:bg-white/5 active:scale-[0.98]",
         outline:
           "border border-border bg-transparent text-foreground hover:bg-card-hover active:scale-[0.98]",
-        link: "text-rubrika-primary underline-offset-4 hover:underline",
+        link: "text-devkit-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",

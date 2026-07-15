@@ -1,0 +1,50 @@
+---
+description: Arquitectura congelada — no cambiar sin aprobación explícita
+alwaysApply: true
+---
+
+# Arquitectura congelada
+
+Fuentes oficiales (siempre):
+
+1. `docs/DEVKIT_VISION.md` — visión de producto
+2. `.cursor/rules/` — reglas permanentes del proyecto
+
+Toda funcionalidad nueva debe respetar ambas **antes** de proponer o escribir cambios.
+
+## Congelado (requiere aprobación explícita)
+
+No modificar automáticamente:
+
+- Categorías / dominios del catálogo
+- Filosofía del producto
+- Arquitectura (capas, Feature First, Core vs plugins)
+- Organización del catálogo
+- Workspace (concepto o modelo)
+- Tool Registry (estructura/contrato, no solo una entry nueva aprobada)
+- Reglas Cursor (`.cursor/rules/`)
+
+Si una tarea lo requiere: **detenerse**, presentar **propuesta de arquitectura**, esperar OK. Nunca rediseñar el proyecto de oficio.
+
+## Modo de trabajo
+
+```
+Problema → Analizar impacto → Revisar DEVKIT_VISION → Revisar .cursor/rules → Implementar
+```
+
+No: Idea → Prompt → Código.
+
+## Antes de una herramienta nueva
+
+Responder (aunque sea breve) antes de código:
+
+1. ¿En qué dominio pertenece?
+2. ¿Qué tarea representa?
+3. ¿Existe una herramienta similar?
+4. ¿Existe un componente reutilizable?
+5. ¿Existe lógica reutilizable?
+6. ¿Cumple necesidad real?
+7. ¿Modifica el Tool Registry? (¿solo entry o también contrato/categorías?)
+8. ¿Requiere cambios de arquitectura?
+
+Si 7 implica reorganizar categorías/contrato, o 8 es sí → propuesta primero, no implementar.

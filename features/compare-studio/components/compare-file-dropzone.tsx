@@ -56,7 +56,7 @@ function CompareFileDropzone({
         }}
         className={cn(
           "flex min-h-[280px] cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border bg-input px-6 py-10 text-center transition-colors",
-          isDragging && "border-rubrika-primary/50 bg-rubrika-primary/5",
+          isDragging && "border-devkit-primary/50 bg-devkit-primary/5",
           disabled && "cursor-not-allowed opacity-50",
         )}
       >
@@ -69,7 +69,7 @@ function CompareFileDropzone({
         </p>
         {fileName && (
           <div className="mt-4 flex items-center gap-2 rounded-lg bg-card px-3 py-2 text-sm">
-            <FileText className="h-4 w-4 text-rubrika-primary" />
+            <FileText className="h-4 w-4 text-devkit-primary" />
             <span className="truncate text-muted">{fileName}</span>
           </div>
         )}

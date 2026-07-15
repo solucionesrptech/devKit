@@ -9,9 +9,9 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-rubrika-primary/30 bg-rubrika-primary/15 text-rubrika-primary",
+          "border-devkit-primary/30 bg-devkit-primary/15 text-devkit-primary",
         accent:
-          "border-rubrika-accent/30 bg-rubrika-accent/15 text-rubrika-accent",
+          "border-devkit-accent/30 bg-devkit-accent/15 text-devkit-accent",
         secondary:
           "border-border bg-card-hover text-muted",
         success:

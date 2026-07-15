@@ -16,8 +16,8 @@ describe("validateUpdateInput", () => {
   it("acepta assignment con tipo NULL sin valor", () => {
     expect(
       validateUpdateInput({
-        assignments: [{ column: "ultimavez", value: "", dataType: "null" }],
-        whereValues: ["14475488-3"],
+        assignments: [{ column: "last_login", value: "", dataType: "null" }],
+        whereValues: ["user-001"],
         whereDataType: "text",
       }),
     ).toBeNull();

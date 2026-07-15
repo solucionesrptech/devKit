@@ -15,7 +15,7 @@
 
 - Logo Devkit en sidebar.
 - Nombre producto: **Devkit**.
-- Colores corporativos **solo como acento**, nunca como fondo principal.
+- Colores de marca **solo como acento**, nunca como fondo principal.
 
 ### Tipografía
 
@@ -124,7 +124,7 @@ Cada herramienta debe mostrar la **funcionalidad principal above the fold**: el 
 ## Accesibilidad mínima (v1)
 
 - Contraste WCAG AA en texto principal.
-- Focus ring visible (color `--ring` = primary Rubrika).
+- Focus ring visible (color `--ring` = primary DevKit).
 - Labels en todos los inputs.
 - `aria-label` en botones solo-icono.
 - No depender solo del color para estados (usar texto/badge).

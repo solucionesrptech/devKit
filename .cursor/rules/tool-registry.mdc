@@ -1,0 +1,24 @@
+---
+description: Tool Registry — modules.ts, tool-pages.ts y status honesto
+alwaysApply: true
+---
+
+# Tool Registry
+
+Catálogo en dos archivos (no unificar salvo pedido explícito):
+
+1. `lib/config/modules.ts` — tools, modules, navigation, status.
+2. `lib/config/tool-pages.ts` — `slug → { Component, layoutWidth, description }`.
+
+## Al registrar una tool
+
+- `category` = dominio existente (ver `product-vision`). Nunca categoría por formato de archivo.
+- `available` solo si existe página real en `tool-pages`. Sin página → `coming-soon` (o placeholder).
+- `id` / `href` (`/tools/<id>`) alineados con la feature folder.
+- Aparición vía catálogo (Dashboard, Sidebar, Palette, categoría) — evitar hardcodes de tools “disponibles” que son placeholders.
+- Workspace **no** se registra como módulo.
+
+## Resolución
+
+`/tools/[slug]` → `getToolById` → `getToolPage` o `ToolPlaceholder`.
+Alias de ruta (ej. `compare-lists`) no son entries del catálogo.

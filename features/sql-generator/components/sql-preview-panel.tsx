@@ -273,7 +273,7 @@ const SqlPreviewPanel = React.memo(function SqlPreviewPanel({
                 Borrado físico permanente. Revisa el SQL antes de ejecutarlo.
               </p>
               <p className="mt-1.5 text-muted">
-                Para borrado lógico usa UPDATE sobre la columna Eliminado.
+                Para borrado lógico usa UPDATE sobre la columna is_deleted.
               </p>
             </div>
           </div>

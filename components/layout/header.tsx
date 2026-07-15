@@ -151,16 +151,16 @@ export function Header() {
                 aria-label="Menú de usuario"
               >
                 <Avatar>
-                  <AvatarFallback>RG</AvatarFallback>
+                  <AvatarFallback>DK</AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
                 <div className="flex flex-col">
-                  <span className="font-medium">Rubrika Dev</span>
+                  <span className="font-medium">DevKit User</span>
                   <span className="text-xs font-normal text-muted">
-                    dev@rubrika.com.mx
+                    user@devkit.local
                   </span>
                 </div>
               </DropdownMenuLabel>

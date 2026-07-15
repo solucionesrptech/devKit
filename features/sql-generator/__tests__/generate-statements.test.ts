@@ -7,21 +7,21 @@ import type { SqlGeneratorInput } from "../types";
 const baseInput: SqlGeneratorInput = {
   operation: "SELECT",
   dialect: "sqlserver",
-  table: "Contratos",
-  whereColumn: "idDocumento",
+  table: "users",
+  whereColumn: "id",
   dataType: "number",
-  values: ["2130933", "2130934", "2130935"],
+  values: ["101", "102", "103"],
 };
 
 describe("generateSelect", () => {
   it("genera SELECT con valores numéricos", () => {
     expect(generateSelect(baseInput)).toBe(
       `SELECT *
-FROM Contratos
-WHERE idDocumento IN (
-2130933,
-2130934,
-2130935
+FROM users
+WHERE id IN (
+101,
+102,
+103
 );`,
     );
   });
@@ -50,15 +50,15 @@ describe("generateDelete", () => {
       ...baseInput,
       operation: "DELETE",
       dataType: "text",
-      values: ["11111111-1", "22222222-2"],
+      values: ["user-001", "user-002"],
     };
 
     expect(generateDelete(input)).toBe(
       `DELETE
-FROM Contratos
-WHERE idDocumento IN (
-'11111111-1',
-'22222222-2'
+FROM users
+WHERE id IN (
+'user-001',
+'user-002'
 );`,
     );
   });

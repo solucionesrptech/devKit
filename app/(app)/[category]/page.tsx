@@ -20,8 +20,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     <div className="mx-auto max-w-7xl space-y-8 p-4 sm:p-6 lg:p-8">
       <section className="animate-fade-in space-y-4">
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-rubrika-primary/10">
-            <module.icon className="h-6 w-6 text-rubrika-primary" />
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-devkit-primary/10">
+            <module.icon className="h-6 w-6 text-devkit-primary" />
           </div>
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-3">
