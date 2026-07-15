@@ -26,7 +26,7 @@
 
 ## Productividad
 
-- **Snippets corporativos:** plantillas de JOINs, filtros estándar, convenciones de nombres Rubrika.
+- **Snippets reutilizables:** plantillas de JOINs, filtros estándar, convenciones de nombres del equipo.
 - **Historial sincronizado** con cuenta (post-auth).
 - **Workspaces:** guardar sesiones («Proyecto X – migración usuarios»).
 - **Batch runner:** cola de generaciones (100 archivos CSV → 100 `.sql`).

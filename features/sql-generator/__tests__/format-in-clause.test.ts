@@ -4,14 +4,14 @@ import { formatInClause } from "../lib/format-in-clause";
 
 describe("formatInClause", () => {
   it("formatea números sin comillas", () => {
-    expect(formatInClause(["2130933", "2130934"], "number")).toBe(
-      "2130933,\n2130934",
+    expect(formatInClause(["101", "102"], "number")).toBe(
+      "101,\n102",
     );
   });
 
   it("formatea texto con comillas simples", () => {
-    expect(formatInClause(["11111111-1", "22222222-2"], "text")).toBe(
-      "'11111111-1',\n'22222222-2'",
+    expect(formatInClause(["user-002", "user-003"], "text")).toBe(
+      "'user-002',\n'user-003'",
     );
   });
 

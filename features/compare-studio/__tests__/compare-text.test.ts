@@ -10,7 +10,7 @@ describe("detectCompareMode", () => {
 
   it("detecta SQL", () => {
     expect(
-      detectCompareMode("SELECT * FROM Usuarios", "SELECT id FROM Usuarios"),
+      detectCompareMode("SELECT * FROM users", "SELECT id FROM users"),
     ).toBe("sql");
   });
 

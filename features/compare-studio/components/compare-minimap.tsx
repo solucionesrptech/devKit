@@ -58,7 +58,7 @@ function CompareMinimap({
               className={
                 isActive
                   ? "cursor-pointer fill-amber-400"
-                  : "cursor-pointer fill-rubrika-primary/80 hover:fill-rubrika-primary"
+                  : "cursor-pointer fill-devkit-primary/80 hover:fill-devkit-primary"
               }
               onClick={() => onJump(index)}
             />

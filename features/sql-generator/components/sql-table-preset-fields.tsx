@@ -71,7 +71,7 @@ function SqlTablePresetFields({
                 id="table"
                 value={table}
                 onChange={(e) => onTableChange(e.target.value)}
-                placeholder="Contratos"
+                placeholder="users"
               />
             ) : (
               <Input id="table" value={table} readOnly />
@@ -85,7 +85,7 @@ function SqlTablePresetFields({
                 id="where-column"
                 value={whereColumn}
                 onChange={(e) => onWhereColumnChange(e.target.value)}
-                placeholder="idDocumento"
+                placeholder="id"
               />
             ) : (
               <Select value={whereColumn} onValueChange={onWhereColumnChange}>
@@ -111,7 +111,7 @@ function SqlTablePresetFields({
               id="table"
               value={table}
               onChange={(e) => onTableChange(e.target.value)}
-              placeholder="Contratos"
+              placeholder="users"
             />
           ) : (
             <Input id="table" value={table} readOnly />

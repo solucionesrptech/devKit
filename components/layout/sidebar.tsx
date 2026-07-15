@@ -34,23 +34,21 @@ export function Sidebar() {
     <div className="flex h-full flex-col">
         <div
           className={cn(
-            "flex h-16 items-center border-b border-border px-4",
+            "flex h-[4.5rem] items-center border-b border-border px-4",
             collapsed ? "justify-center" : "justify-between",
           )}
         >
           {!collapsed && (
-            <Link href="/" className="flex min-w-0 items-center gap-2.5">
+            <Link href="/" className="flex min-w-0 items-center gap-3">
               <AppLogo />
-              <span className="truncate text-xs font-semibold text-muted">
+              <span className="truncate text-sm font-semibold text-foreground">
                 Devkit
               </span>
             </Link>
           )}
           {collapsed && (
             <Link href="/" aria-label="Devkit" className="shrink-0">
-              <div className="flex h-8 w-8 items-center overflow-hidden rounded-lg">
-                <AppLogo alt="" variant="mark" />
-              </div>
+              <AppLogo alt="" variant="mark" />
             </Link>
           )}
           <Button
@@ -88,7 +86,7 @@ export function Sidebar() {
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                     active
-                      ? "bg-[var(--sidebar-active)] text-rubrika-primary"
+                      ? "bg-[var(--sidebar-active)] text-devkit-primary"
                       : "text-muted hover:bg-[var(--sidebar-hover)] hover:text-foreground",
                     collapsed && "justify-center px-2",
                   )}
@@ -96,7 +94,7 @@ export function Sidebar() {
                   <item.icon
                     className={cn(
                       "h-4 w-4 shrink-0",
-                      active ? "text-rubrika-primary" : "text-muted",
+                      active ? "text-devkit-primary" : "text-muted",
                     )}
                   />
                   {!collapsed && <span className="truncate">{item.name}</span>}
@@ -121,12 +119,12 @@ export function Sidebar() {
 
         {!collapsed && (
           <div className="border-t border-border p-4">
-            <div className="rounded-lg bg-rubrika-primary/10 p-3">
-              <p className="text-xs font-medium text-rubrika-primary">
+            <div className="rounded-lg bg-devkit-primary/10 p-3">
+              <p className="text-xs font-medium text-devkit-primary">
                 Devkit
               </p>
               <p className="mt-1 text-xs text-muted">
-                Suite interna de herramientas para desarrolladores.
+                Suite de herramientas para desarrollo y productividad.
               </p>
             </div>
           </div>

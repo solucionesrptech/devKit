@@ -45,8 +45,8 @@ export function getMonacoLanguage(
   }
 }
 
-export function defineRubrikaMonacoThemes(monaco: typeof import("monaco-editor")) {
-  monaco.editor.defineTheme("rubrika-dark", {
+export function defineDevKitMonacoThemes(monaco: typeof import("monaco-editor")) {
+  monaco.editor.defineTheme("devkit-dark", {
     base: "vs-dark",
     inherit: true,
     rules: [],
@@ -58,7 +58,7 @@ export function defineRubrikaMonacoThemes(monaco: typeof import("monaco-editor")
     },
   });
 
-  monaco.editor.defineTheme("rubrika-light", {
+  monaco.editor.defineTheme("devkit-light", {
     base: "vs",
     inherit: true,
     rules: [],
@@ -71,9 +71,9 @@ export function defineRubrikaMonacoThemes(monaco: typeof import("monaco-editor")
   });
 }
 
-export function getRubrikaMonacoTheme(): "rubrika-dark" | "rubrika-light" {
-  if (typeof document === "undefined") return "rubrika-dark";
+export function getDevKitMonacoTheme(): "devkit-dark" | "devkit-light" {
+  if (typeof document === "undefined") return "devkit-dark";
   return document.documentElement.getAttribute("data-theme") === "light"
-    ? "rubrika-light"
-    : "rubrika-dark";
+    ? "devkit-light"
+    : "devkit-dark";
 }

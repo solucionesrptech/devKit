@@ -15,7 +15,7 @@ function TextValuesInput({ value, onChange, valueCount }: TextValuesInputProps) 
       value={value}
       onChange={onChange}
       valueCount={valueCount}
-      placeholder={`2130933\n2130934\n2130935\n\no\n\n11111111-1\n22222222-2`}
+      placeholder={`101\n102\n103\n\no\n\nuser-001\nuser-002`}
     />
   );
 }

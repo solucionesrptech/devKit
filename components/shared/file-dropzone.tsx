@@ -1,17 +1,20 @@
 "use client";
 
-import { FileSpreadsheet, Upload } from "lucide-react";
+import { FileSpreadsheet, Upload, type LucideIcon } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-const ACCEPTED_EXTENSIONS = [".xlsx", ".xls", ".csv"];
+const DEFAULT_EXTENSIONS = [".xlsx", ".xls", ".csv"];
 
 type FileDropzoneProps = {
   onFileSelect: (file: File) => void;
   fileName?: string;
   className?: string;
   disabled?: boolean;
+  accept?: string[];
+  formatsLabel?: string;
+  fileIcon?: LucideIcon;
 };
 
 function FileDropzone({
@@ -19,6 +22,9 @@ function FileDropzone({
   fileName,
   className,
   disabled,
+  accept = DEFAULT_EXTENSIONS,
+  formatsLabel = "Formatos: .xlsx, .xls, .csv",
+  fileIcon: FileIcon = FileSpreadsheet,
 }: FileDropzoneProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = React.useState(false);
@@ -56,7 +62,7 @@ function FileDropzone({
         onDrop={handleDrop}
         className={cn(
           "flex cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed border-border bg-input px-6 py-10 text-center transition-colors",
-          isDragging && "border-rubrika-primary/50 bg-rubrika-primary/5",
+          isDragging && "border-devkit-primary/50 bg-devkit-primary/5",
           disabled && "cursor-not-allowed opacity-50",
         )}
       >
@@ -64,12 +70,10 @@ function FileDropzone({
         <p className="text-sm font-medium text-foreground">
           Arrastra un archivo o haz clic para subir
         </p>
-        <p className="mt-1 text-xs text-muted">
-          Formatos: .xlsx, .xls, .csv
-        </p>
+        <p className="mt-1 text-xs text-muted">{formatsLabel}</p>
         {fileName && (
           <div className="mt-4 flex items-center gap-2 rounded-lg bg-card px-3 py-2 text-sm">
-            <FileSpreadsheet className="h-4 w-4 text-rubrika-primary" />
+            <FileIcon className="h-4 w-4 text-devkit-primary" />
             <span className="truncate text-muted">{fileName}</span>
           </div>
         )}
@@ -77,7 +81,7 @@ function FileDropzone({
       <input
         ref={inputRef}
         type="file"
-        accept={ACCEPTED_EXTENSIONS.join(",")}
+        accept={accept.join(",")}
         className="sr-only"
         disabled={disabled}
         onChange={(e) => {

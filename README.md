@@ -1,6 +1,6 @@
 # Devkit
 
-Suite interna de herramientas para desarrolladores de Rubrika.
+Suite de herramientas para desarrollo y productividad.
 
 ## Documentación
 
@@ -12,7 +12,7 @@ La definición de producto vive en **[docs/](./docs/README.md)**. Léela antes d
 - Cada herramienta resuelve un problema específico con el menor número de clics posible.
 - Arquitectura **Feature First**. Registry central para módulos y rutas.
 - Stack: Next.js, TypeScript, Tailwind, shadcn/ui, Lucide. Sin Bootstrap.
-- Dark mode por defecto. Identidad visual Rubrika (acentos corporativos).
+- Dark mode por defecto. Identidad visual DevKit (acentos de marca).
 - v1 sin backend salvo necesidad estricta.
 
 ## Stack

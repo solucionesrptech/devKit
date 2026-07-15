@@ -17,7 +17,7 @@ function Toaster({ ...props }: ToasterProps) {
             "group toast group-[.toaster]:bg-popover group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-[var(--shadow-soft)]",
           description: "group-[.toast]:text-muted",
           actionButton:
-            "group-[.toast]:bg-rubrika-primary group-[.toast]:text-white",
+            "group-[.toast]:bg-devkit-primary group-[.toast]:text-white",
           cancelButton:
             "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
         },

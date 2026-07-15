@@ -43,7 +43,7 @@ function SqlOperationFields({
         </Select>
         {operation === "DELETE" && (
           <p className="text-xs text-muted">
-            Para borrado lógico usa UPDATE sobre la columna Eliminado.
+            Para borrado lógico usa UPDATE sobre la columna is_deleted.
           </p>
         )}
       </div>

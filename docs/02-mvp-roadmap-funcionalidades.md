@@ -16,7 +16,7 @@ El **MVP (v1.0)** es una aplicación web interna, sin backend, que incluye el **
 - Registro central de módulos y herramientas (catálogo único).
 - Rutas independientes por herramienta.
 - Dark mode por defecto; light mode opcional.
-- Identidad visual Rubrika (colores corporativos como acento).
+- Identidad visual DevKit (colores de marca como acento).
 
 ### Herramientas funcionales (v1.0)
 

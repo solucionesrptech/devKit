@@ -40,11 +40,11 @@ export function ModuleCard({ module, className }: ModuleCardProps) {
       )}
       aria-disabled={disabled}
     >
-      <Card className="h-full transition-all duration-200 hover:border-rubrika-primary/30 hover:bg-card-hover hover:shadow-[var(--shadow-soft)] hover:-translate-y-0.5">
+      <Card className="h-full transition-all duration-200 hover:border-devkit-primary/30 hover:bg-card-hover hover:shadow-[var(--shadow-soft)] hover:-translate-y-0.5">
         <CardContent className="flex h-full flex-col gap-5 p-6">
           <div className="flex items-start justify-between">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-rubrika-primary/10 transition-colors duration-200 group-hover:bg-rubrika-primary/20">
-              <module.icon className="h-5 w-5 text-rubrika-primary" />
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-devkit-primary/10 transition-colors duration-200 group-hover:bg-devkit-primary/20">
+              <module.icon className="h-5 w-5 text-devkit-primary" />
             </div>
             <Badge variant={statusVariant(module.status)}>
               {statusLabels[module.status]}
@@ -62,7 +62,7 @@ export function ModuleCard({ module, className }: ModuleCardProps) {
               {module.toolCount === 1 ? "herramienta" : "herramientas"}
             </span>
             {!disabled && (
-              <ArrowRight className="h-4 w-4 text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-rubrika-primary" />
+              <ArrowRight className="h-4 w-4 text-muted transition-transform duration-200 group-hover:translate-x-1 group-hover:text-devkit-primary" />
             )}
           </div>
         </CardContent>
@@ -90,13 +90,13 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
     >
       <Card
         className={cn(
-          "transition-all duration-200 hover:border-rubrika-primary/30 hover:bg-card-hover",
+          "transition-all duration-200 hover:border-devkit-primary/30 hover:bg-card-hover",
           compact ? "hover:shadow-none" : "hover:shadow-[var(--shadow-soft)] hover:-translate-y-0.5",
         )}
       >
         <CardContent className={cn("flex items-center gap-4", compact ? "p-4" : "p-5")}>
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-rubrika-primary/10">
-            <tool.icon className="h-4 w-4 text-rubrika-primary" />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-devkit-primary/10">
+            <tool.icon className="h-4 w-4 text-devkit-primary" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ export function ToolCard({ tool, compact = false }: ToolCardProps) {
               <p className="mt-0.5 truncate text-sm text-muted">{tool.description}</p>
             )}
           </div>
-          <ArrowRight className="h-4 w-4 shrink-0 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100 group-hover:text-rubrika-primary" />
+          <ArrowRight className="h-4 w-4 shrink-0 text-muted opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100 group-hover:text-devkit-primary" />
         </CardContent>
       </Card>
     </Link>
@@ -129,9 +129,9 @@ export function QuickAccess({ items }: QuickAccessProps) {
         <Link
           key={item.href}
           href={item.href}
-          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium transition-all duration-200 hover:border-rubrika-primary/30 hover:bg-card-hover"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium transition-all duration-200 hover:border-devkit-primary/30 hover:bg-card-hover"
         >
-          <item.icon className="h-3.5 w-3.5 text-rubrika-primary" />
+          <item.icon className="h-3.5 w-3.5 text-devkit-primary" />
           {item.label}
         </Link>
       ))}
@@ -153,7 +153,7 @@ export function RecentList({ items }: RecentListProps) {
           className="group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors duration-200 hover:bg-white/[0.03]"
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-input">
-            <tool.icon className="h-3.5 w-3.5 text-muted group-hover:text-rubrika-primary" />
+            <tool.icon className="h-3.5 w-3.5 text-muted group-hover:text-devkit-primary" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-medium">{tool.name}</p>
@@ -178,7 +178,7 @@ export function FavoritesList({ tools }: FavoritesListProps) {
           href={tool.href}
           className="group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors duration-200 hover:bg-white/[0.03]"
         >
-          <Star className="h-3.5 w-3.5 shrink-0 fill-rubrika-accent text-rubrika-accent" />
+          <Star className="h-3.5 w-3.5 shrink-0 fill-devkit-accent text-devkit-accent" />
           <span className="truncate text-sm font-medium">{tool.name}</span>
         </Link>
       ))}

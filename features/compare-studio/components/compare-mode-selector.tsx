@@ -38,7 +38,7 @@ function CompareModeSelector({
             className={cn(
               "rounded-full border px-3 py-1.5 text-sm transition-colors",
               mode === option.value
-                ? "border-rubrika-primary bg-rubrika-primary/10 text-foreground"
+                ? "border-devkit-primary bg-devkit-primary/10 text-foreground"
                 : "border-border bg-card text-muted hover:text-foreground",
             )}
           >

@@ -3,6 +3,7 @@ import {
   Braces,
   Database,
   FileSpreadsheet,
+  FileText,
   GitCompare,
   LayoutDashboard,
   Search,
@@ -85,6 +86,16 @@ export const tools: Tool[] = [
     icon: GitCompare,
   },
   {
+    id: "pdf-base64",
+    name: "PDF → Base64",
+    description:
+      "Convierte un archivo PDF a Base64 en el navegador, sin enviar datos a ningún servidor.",
+    href: "/tools/pdf-base64",
+    status: "available",
+    category: "text-tools",
+    icon: FileText,
+  },
+  {
     id: "json-xml-tools",
     name: "JSON/XML Tools",
     description: "Formatea, valida y transforma JSON y XML.",
@@ -140,7 +151,7 @@ export const modules: Module[] = [
     description: "Utilidades para comparar, formatear y transformar texto.",
     href: "/text-tools",
     icon: Text,
-    toolCount: 2,
+    toolCount: 3,
     status: "available",
     tools: tools.filter((t) => t.category === "text-tools"),
   },

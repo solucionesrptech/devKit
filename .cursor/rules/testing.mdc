@@ -1,0 +1,14 @@
+---
+description: Tests Vitest y fixtures genéricos
+globs: "**/__tests__/**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# Tests
+
+- Cubrir lógica pura nueva o modificada (parsers, generadores, diffs, validaciones).
+- Fixtures genéricos: `users`, `orders`, `user-001`, `101`.
+- No usar nombres de tablas/columnas internas de sistemas reales ni datos personales.
+- Tests colocalizados en `features/<id>/__tests__/`.
+- Tras cambiar generadores o parsers, actualizar expectativas y `ARCHITECTURE.md` de la feature si aplica.
+- Ejecutar `npm run test` antes de dar por cerrado un cambio de lógica.

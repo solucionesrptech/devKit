@@ -5,9 +5,9 @@ import type { editor } from "monaco-editor";
 import * as React from "react";
 
 import {
-  defineRubrikaMonacoThemes,
+  defineDevKitMonacoThemes,
   getMonacoLanguage,
-  getRubrikaMonacoTheme,
+  getDevKitMonacoTheme,
 } from "@/features/compare-studio/lib/monaco-language";
 import type { CompareMode } from "@/features/compare-studio/types";
 
@@ -37,14 +37,14 @@ function CompareDiffView({
     [],
   );
   const [activeDiffIndex, setActiveDiffIndex] = React.useState(0);
-  const [theme, setTheme] = React.useState(getRubrikaMonacoTheme());
+  const [theme, setTheme] = React.useState(getDevKitMonacoTheme());
 
   const language = getMonacoLanguage(mode, leftFileName, rightFileName);
   const totalLines = Math.max(original.split("\n").length, 1);
 
   React.useEffect(() => {
     const root = document.documentElement;
-    const updateTheme = () => setTheme(getRubrikaMonacoTheme());
+    const updateTheme = () => setTheme(getDevKitMonacoTheme());
     const observer = new MutationObserver(updateTheme);
     observer.observe(root, {
       attributes: true,
@@ -71,7 +71,7 @@ function CompareDiffView({
   };
 
   const handleBeforeMount = (monaco: Monaco) => {
-    defineRubrikaMonacoThemes(monaco);
+    defineDevKitMonacoThemes(monaco);
   };
 
   const jumpToDiff = (index: number) => {

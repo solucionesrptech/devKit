@@ -1,0 +1,31 @@
+---
+description: Visión DevKit — dominios, tareas, necesidad real, Core vs plugins
+alwaysApply: true
+---
+
+# Visión de producto DevKit
+
+Fuente: `docs/DEVKIT_VISION.md`.
+
+## Qué es / qué no es
+
+- Plataforma de productividad: catálogo de tools + Workspace.
+- Offline-first en el Core. No es IDE, ni ETL, ni marketplace genérico.
+- No crear tools “porque serían útiles” sin necesidad real.
+
+## Principios permanentes
+
+1. **Categoría = dominio** (SQL Tools, Compare, Encoding, Text Tools, Data Tools, Developer Tools, Database, AI Tools). Nunca categoría por formato de archivo (Excel, PDF, CSV, Image).
+2. **Herramienta = tarea** (Generate UPDATE, Compare JSON, PDF → Base64). No hubs ambiguos (“Base64 Studio”).
+3. **Necesidad real** — al menos uno: problema real, automatizar repetición, reemplazar web externa, menos errores, sustituir script manual, necesidad de trabajo.
+
+## Dominios clave
+
+- **SQL Tools** = scripts SQL offline. **Database** = BD real conectada (futuro). No confundir.
+- **Compare CSV** solo en Compare. **Data Tools** solo transformación de datos.
+- Excel/PDF/CSV son inputs u outputs, no dominios.
+
+## Core vs plugins
+
+- Mantener Core pequeño y mantenible (shell, registry, shared, tools offline prioritarias).
+- Oracle, MySQL, PostgreSQL, MongoDB, Redis, Azure, AWS, SAP, etc. → plugins/módulos opcionales, **fuera del Core**.

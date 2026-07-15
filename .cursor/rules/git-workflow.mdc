@@ -1,0 +1,13 @@
+---
+description: Flujo Git — commits solo bajo pedido explícito
+alwaysApply: true
+---
+
+# Git workflow
+
+- No crear commits salvo que el usuario lo pida explícitamente.
+- No push, force push, amend ni cambiar git config salvo pedido explícito.
+- No `--no-verify` salvo pedido explícito.
+- No incluir secretos (`.env`, credenciales) en commits.
+- Mensajes de commit: concisos, en tono del repo, enfocados en el porqué.
+- No crear PRs ni branches de release salvo que se pidan.

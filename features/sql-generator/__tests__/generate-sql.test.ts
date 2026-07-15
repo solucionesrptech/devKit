@@ -20,7 +20,7 @@ describe("generateSql", () => {
     const result = generateSql({
       operation: "SELECT",
       dialect: "sqlserver",
-      table: "Contratos",
+      table: "users",
       whereColumn: "",
       dataType: "number",
       values: ["1"],
@@ -33,7 +33,7 @@ describe("generateSql", () => {
     const result = generateSql({
       operation: "SELECT",
       dialect: "sqlserver",
-      table: "Contratos",
+      table: "users",
       whereColumn: "id",
       dataType: "number",
       values: [],
@@ -46,7 +46,7 @@ describe("generateSql", () => {
     const result = generateSql({
       operation: "SELECT",
       dialect: "sqlserver",
-      table: "Contratos",
+      table: "users",
       whereColumn: "id",
       dataType: "number",
       values: ["123", "abc"],
@@ -61,10 +61,10 @@ describe("generateSql", () => {
     const result = generateSql({
       operation: "SELECT",
       dialect: "sqlserver",
-      table: "Contratos",
+      table: "users",
       whereColumn: "id",
       dataType: "text",
-      values: ["11111111-1", "22222222-2"],
+      values: ["user-002", "user-003"],
     });
 
     expect(result.sql).not.toBeNull();
@@ -79,7 +79,7 @@ describe("generateSql", () => {
     const result = generateSql({
       operation: "SELECT",
       dialect: "sqlserver",
-      table: "Contratos",
+      table: "users",
       whereColumn: "id",
       dataType: "text",
       values,

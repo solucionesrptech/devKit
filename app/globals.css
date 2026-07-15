@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --rubrika-primary: #4152a0;
-  --rubrika-secondary: #41007b;
-  --rubrika-accent: #ffd250;
-  --rubrika-text: #636363;
-  --rubrika-neutral: #3f3f3f;
+  --devkit-primary: #4152a0;
+  --devkit-secondary: #41007b;
+  --devkit-accent: #ffd250;
+  --devkit-text: #636363;
+  --devkit-neutral: #3f3f3f;
 
   --background: #090b10;
   --foreground: #e8eaed;
@@ -54,11 +54,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-sidebar: var(--sidebar);
-  --color-rubrika-primary: var(--rubrika-primary);
-  --color-rubrika-secondary: var(--rubrika-secondary);
-  --color-rubrika-accent: var(--rubrika-accent);
-  --color-rubrika-text: var(--rubrika-text);
-  --color-rubrika-neutral: var(--rubrika-neutral);
+  --color-devkit-primary: var(--devkit-primary);
+  --color-devkit-secondary: var(--devkit-secondary);
+  --color-devkit-accent: var(--devkit-accent);
+  --color-devkit-text: var(--devkit-text);
+  --color-devkit-neutral: var(--devkit-neutral);
   --font-sans: var(--font-inter);
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);

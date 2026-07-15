@@ -2,15 +2,16 @@
 
 ## Visión
 
-**Devkit** será la plataforma interna de productividad para el equipo técnico de Rubrika: un lugar único, rápido y confiable donde resolver tareas repetitivas de desarrollo y datos en segundos, no en minutos.
+**Devkit** será la plataforma de productividad para equipos técnicos: un lugar único, rápido y confiable donde resolver tareas repetitivas de desarrollo y datos en segundos, no en minutos.
 
-No compite con un IDE ni con un cliente SQL. Compite con el tiempo perdido en tareas manuales: copiar filas de Excel, armar un `IN (...)` de cien IDs, formatear un script sucio o comparar dos listas de RUT.
+No compite con un IDE ni con un cliente SQL. Compite con el tiempo perdido en tareas manuales: copiar filas de Excel, armar un `IN (...)` de cien IDs, formatear un script sucio o comparar dos listas de identificadores.
 
-La plataforma debe sentirse como una herramienta que un desarrollador abre varias veces al día — al nivel de productos como Linear o Raycast en claridad y velocidad — pero con identidad Rubrika y enfoque en problemas reales del día a día.
+La plataforma debe sentirse como una herramienta que un desarrollador abre varias veces al día — al nivel de productos como Linear o Raycast en claridad y velocidad — con identidad DevKit y enfoque en problemas reales del día a día.
 
 ## Propuesta de valor
 
-| Para el usuario | Para Rubrika |
+| Para el usuario | Para el equipo / organización |
+|-----------------|-------------------------------|
 |-----------------|--------------|
 | Menos clics, menos errores, menos sintaxis memorizada | Menor tiempo en tareas operativas |
 | Una sola suite en lugar de scripts dispersos | Conocimiento encapsulado y reutilizable |
@@ -55,7 +56,7 @@ La plataforma debe sentirse como una herramienta que un desarrollador abre varia
 
 - Aplicación **100 % frontend** en v1 (procesamiento en cliente).
 - Arquitectura **Feature First** y registro central de módulos/herramientas.
-- UI consistente con **shadcn/ui**, dark mode, identidad Rubrika.
+- UI consistente con **shadcn/ui**, dark mode, identidad DevKit.
 - Código **TypeScript estricto**, testeable y documentado.
 - Preparación para v2 (auth, API, conexión BD) sin deuda en el núcleo.
 

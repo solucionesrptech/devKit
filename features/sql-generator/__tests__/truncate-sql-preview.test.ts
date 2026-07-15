@@ -9,10 +9,10 @@ import {
 describe("truncateSqlPreview", () => {
   it("no trunca SQL pequeño con IN", () => {
     const sql = `SELECT *
-FROM Usuarios
-WHERE usuarioid IN (
-'11111111-1',
-'22222222-2'
+FROM users
+WHERE id IN (
+'user-002',
+'user-003'
 );`;
 
     const result = truncateSqlPreview(sql);
@@ -26,8 +26,8 @@ WHERE usuarioid IN (
       (_, i) => `'id-${i}'`,
     ).join(",\n");
     const sql = `SELECT *
-FROM Usuarios
-WHERE usuarioid IN (
+FROM users
+WHERE id IN (
 ${values}
 );`;
 
@@ -45,7 +45,7 @@ ${values}
     const statements = Array.from(
       { length: PREVIEW_MAX_STATEMENTS + 5 },
       (_, i) =>
-        `UPDATE Usuarios\nSET deshabilitado = 1\nWHERE usuarioid = 'id-${i}';`,
+        `UPDATE users\nSET is_locked = 1\nWHERE id = 'id-${i}';`,
     );
     const sql = `-- 55 registros · UPDATE individual\n${statements.join("\n\n")}`;
 
@@ -62,11 +62,11 @@ ${values}
 
   it("no trunca UPDATE bulk con pocos valores en IN", () => {
     const sql = `-- 2 registros · UPDATE masivo (WHERE IN)
-UPDATE Usuarios
-SET deshabilitado = 1
-WHERE usuarioid IN (
-'11111111-1',
-'22222222-2'
+UPDATE users
+SET is_locked = 1
+WHERE id IN (
+'user-002',
+'user-003'
 );`;
 
     const result = truncateSqlPreview(sql);

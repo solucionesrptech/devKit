@@ -1,0 +1,27 @@
+---
+description: UI de tools y shell — layouts, shared components, microcopy
+globs: "**/{components,features,app}/**/*.{tsx,ts}"
+alwaysApply: false
+---
+
+# Frontend UI
+
+## Layout de herramienta
+
+Seguir el patrón existente: header (icono, título, badge) + superficie de trabajo.
+Above the fold: entrada principal y acción visible sin scroll innecesario.
+Una tool = una superficie; cards solo para preview/resultado/bloques independientes.
+Ancho vía `layoutWidth` en `tool-pages` (`default` / `wide` / `full`).
+
+## Reutilizar antes de crear
+
+Preferir: `ToolPageLayout`, `ToolPageHeader`, `ToolWorkspace`, `PasteZone`, `CopyButton`, `Button`, `Badge`, inputs existentes.
+Tokens y sin inline/`!important`: ver `styling`.
+
+## UX
+
+- Preview del resultado antes de copiar.
+- Toasts para “copiado” (sonner).
+- Microcopy en español, directo, errores accionables.
+- No inventar kits UI paralelos (Bootstrap, etc.).
+- Iconos: `lucide-react` únicamente.

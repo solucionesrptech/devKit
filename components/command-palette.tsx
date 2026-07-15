@@ -76,7 +76,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                   "flex cursor-pointer items-center gap-3 rounded-lg aria-selected:bg-white/5",
                 )}
               >
-                <LayoutDashboard className="h-4 w-4 text-rubrika-primary" />
+                <LayoutDashboard className="h-4 w-4 text-devkit-primary" />
                 <span>Dashboard</span>
               </Command.Item>
               <Command.Item
@@ -85,7 +85,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                 }
                 className="flex cursor-pointer items-center gap-3 rounded-lg aria-selected:bg-white/5"
               >
-                <Sparkles className="h-4 w-4 text-rubrika-accent" />
+                <Sparkles className="h-4 w-4 text-devkit-accent" />
                 <span>SQL Generator</span>
               </Command.Item>
               <Command.Item
@@ -94,7 +94,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                 }
                 className="flex cursor-pointer items-center gap-3 rounded-lg aria-selected:bg-white/5"
               >
-                <FileSpreadsheet className="h-4 w-4 text-rubrika-primary" />
+                <FileSpreadsheet className="h-4 w-4 text-devkit-primary" />
                 <span>Excel → SQL</span>
               </Command.Item>
               <Command.Item
@@ -115,7 +115,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                   onSelect={() => runCommand(() => router.push(module.href))}
                   className="flex cursor-pointer items-center gap-3 rounded-lg aria-selected:bg-white/5"
                 >
-                  <module.icon className="h-4 w-4 text-rubrika-primary" />
+                  <module.icon className="h-4 w-4 text-devkit-primary" />
                   <div className="flex flex-1 flex-col">
                     <span>{module.name}</span>
                     <span className="text-xs text-muted">{module.description}</span>
@@ -167,7 +167,7 @@ export function CommandPaletteTrigger({
     <button
       type="button"
       onClick={onClick}
-      className="group flex h-10 w-full max-w-md items-center gap-2 rounded-lg border border-border bg-input px-3 text-sm text-muted transition-colors duration-200 hover:border-rubrika-primary/30 hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group flex h-10 w-full max-w-md items-center gap-2 rounded-lg border border-border bg-input px-3 text-sm text-muted transition-colors duration-200 hover:border-devkit-primary/30 hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <Search className="h-4 w-4 shrink-0" />
       <span className="flex-1 text-left">Buscar herramientas...</span>
