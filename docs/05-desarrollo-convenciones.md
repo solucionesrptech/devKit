@@ -58,7 +58,7 @@ npm run build
 
 - Producto: **DevKit** (en UI a veces “Devkit” según copy existente; no introducir otras marcas).
 - Placeholders de usuario: `DevKit User` / `user@devkit.local`.
-- Presets, fixtures y ejemplos: tablas genéricas (`users`, `orders`, …). Sin estructuras internas reales.
+- Presets SQL: conservar exactamente los nombres reales configurados de tablas y columnas. Los fixtures y ejemplos de pruebas pueden seguir usando nombres genéricos.
 - Microcopy en español, claro y accionable.
 
 ### Archivos y carpetas

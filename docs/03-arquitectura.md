@@ -40,7 +40,7 @@ DevKit/
 │   ├── config/
 │   │   ├── modules.ts        # Catálogo módulos + tools (nav)
 │   │   ├── tool-pages.ts     # Slug → Component + layout
-│   │   └── sql-presets.ts    # Presets genéricos de tablas
+│   │   └── sql-presets.ts    # Presets de tablas frecuentes
 │   ├── hooks/
 │   └── utils.ts
 ├── providers/                # Theme, Sidebar
@@ -128,7 +128,7 @@ Migración: si existe una clave de tema legacy previa al rebrand, se copia una v
 
 ### Presets SQL
 
-Los presets en `lib/config/sql-presets.ts` son **genéricos** (`users`, `employees`, `customers`, `documents`, `orders`). No deben incluir estructuras internas de sistemas reales ni datos personales de ejemplo.
+Los presets en `lib/config/sql-presets.ts` representan tablas frecuentes reales. Sus nombres de tabla, columnas, mayúsculas y minúsculas forman parte del contrato SQL y no deben traducirse, normalizarse ni reemplazarse por nombres genéricos sin autorización explícita.
 
 ---
 

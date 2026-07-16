@@ -14,7 +14,7 @@ const CODE_PATTERN =
 
 export function detectCompareMode(left: string, right: string): CompareMode {
   const combined = `${left}\n${right}`.trim();
-  if (!combined) return "code";
+  if (!combined) return "text";
 
   const leftJson = tryParseJson(left);
   const rightJson = tryParseJson(right);
@@ -41,11 +41,11 @@ export function detectCompareMode(left: string, right: string): CompareMode {
     ...rightLines.map((line) => line.trim().length),
   );
 
-  if (maxLineLength <= 64 && leftLines.length > 0 && rightLines.length > 0) {
+  if (maxLineLength <= 64 && leftLines.length >= 2 && rightLines.length >= 2) {
     return "list";
   }
 
-  return "code";
+  return "text";
 }
 
 function tryParseJson(text: string): boolean {
@@ -117,7 +117,16 @@ export function runCompare(
     return compareTextLike(leftText, rightText, options, "sql", prepare);
   }
 
-  return compareTextLike(leftText, rightText, options, "code");
+  if (resolvedMode === "text") {
+    return compareTextLike(leftText, rightText, options, "text");
+  }
+
+  return compareTextLike(
+    leftText,
+    rightText,
+    { ...options, ignoreLineBreaks: false },
+    "code",
+  );
 }
 
 export function getResolvedMode(

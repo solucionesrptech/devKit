@@ -36,7 +36,7 @@ function CompareEditor({
   return (
     <div className="grid gap-4 xl:grid-cols-2">
       <CompareInput
-        sideLabel="Origen izquierdo"
+        sideLabel="Original · izquierda"
         sourceKind={leftSourceKind}
         text={leftText}
         fileName={leftFileName}
@@ -45,7 +45,7 @@ function CompareEditor({
         onFileSelect={onLeftFileSelect}
       />
       <CompareInput
-        sideLabel="Origen derecho"
+        sideLabel="Nueva versión · derecha"
         sourceKind={rightSourceKind}
         text={rightText}
         fileName={rightFileName}

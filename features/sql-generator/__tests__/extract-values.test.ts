@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import {
-  extractValuesFromCells,
-  MAX_VALID_RECORDS,
-  MAX_VALID_RECORDS_MESSAGE,
-} from "../lib/extract-values";
+import { extractValuesFromCells } from "../lib/extract-values";
 import { extractColumnValues } from "../lib/parse-spreadsheet";
 import { parseValuesFromText } from "../lib/parse-values";
 import type { ParsedSpreadsheet } from "../types";
@@ -73,21 +69,19 @@ describe("extractValuesFromCells", () => {
     expect(result.stats.validProcessed).toBe(2);
   });
 
-  it("rechaza más de 10000 registros válidos con reporte completo", () => {
-    const cells = Array.from({ length: MAX_VALID_RECORDS + 1 }, (_, i) =>
-      String(i),
-    );
+  it("procesa más de 10000 registros válidos sin límite artificial", () => {
+    const cells = Array.from({ length: 25_000 }, (_, i) => String(i));
     const result = extractValuesFromCells(cells, {
       removeDuplicates: false,
       rowsDetected: cells.length,
       rowNumberOffset: 1,
     });
 
-    expect(result.values).toEqual([]);
-    expect(result.error).toBe(MAX_VALID_RECORDS_MESSAGE);
-    expect(result.stats.validProcessed).toBe(0);
-    expect(result.quality.validRecords).toBe(MAX_VALID_RECORDS + 1);
-    expect(result.quality.omittedByLimit).toBe(1);
+    expect(result.values).toHaveLength(25_000);
+    expect(result.values.at(-1)).toBe("24999");
+    expect(result.error).toBeNull();
+    expect(result.stats.validProcessed).toBe(25_000);
+    expect(result.quality.validRecords).toBe(25_000);
     expect(result.duplicates).toEqual([]);
   });
 

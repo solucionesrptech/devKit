@@ -5,12 +5,13 @@ import * as React from "react";
 
 import { CopyButton } from "@/components/shared/copy-button";
 import { SqlPreview } from "@/components/shared/sql-preview";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import type {
-  DataQualityReport,
-  DuplicateEntry,
-} from "@/features/sql-generator/lib/extract-values";
-import { PREVIEW_MAX_IN_LINES } from "@/features/sql-generator/lib/truncate-sql-preview";
+import type { DataQualityReport } from "@/features/sql-generator/lib/extract-values";
+import {
+  PREVIEW_MAX_IN_LINES,
+  truncateSqlPreview,
+} from "@/features/sql-generator/lib/truncate-sql-preview";
 import type {
   SqlGenerationMeta,
   SqlOperation,
@@ -19,7 +20,6 @@ import type {
   UpdateValidationOptions,
 } from "@/features/sql-generator/types";
 
-import { DataQualityReportPanel } from "./data-quality-report-panel";
 import { UpdateValidationCopyButtons } from "./update-validation-copy-buttons";
 
 type SqlPreviewPanelProps = {
@@ -37,12 +37,16 @@ type SqlPreviewPanelProps = {
     statementCount: number;
   };
   extractionQuality?: DataQualityReport | null;
-  extractionDuplicates?: DuplicateEntry[];
-  sqlGeneratedCount?: number;
-  removeDuplicates?: boolean;
-  omittedDuplicates?: number;
   validationOptions?: UpdateValidationOptions;
   validationBlocks?: UpdateValidationBlocks | null;
+};
+
+type ValidationBlockKey = keyof UpdateValidationBlocks;
+
+const validationBlockLabels: Record<ValidationBlockKey, string> = {
+  preSelect: "SELECT previo",
+  update: "UPDATE",
+  postSelect: "SELECT posterior",
 };
 
 function formatGenerationLabel(label: string): string {
@@ -224,20 +228,45 @@ const SqlPreviewPanel = React.memo(function SqlPreviewPanel({
   generationMeta,
   updateMeta,
   extractionQuality,
-  extractionDuplicates = [],
-  sqlGeneratedCount,
-  removeDuplicates = false,
-  omittedDuplicates = 0,
   validationOptions,
   validationBlocks,
 }: SqlPreviewPanelProps) {
+  const [selectedValidationBlock, setSelectedValidationBlock] =
+    React.useState<ValidationBlockKey>("preSelect");
   const recordCount =
     generationMeta?.recordCount ??
     updateMeta?.recordCount ??
     (operation === "UPDATE" ? valueCount : 0);
 
+  const availableValidationBlocks = React.useMemo(
+    () =>
+      validationBlocks
+        ? (Object.keys(validationBlockLabels) as ValidationBlockKey[]).filter(
+            (key) => Boolean(validationBlocks[key]),
+          )
+        : [],
+    [validationBlocks],
+  );
+  const activeValidationBlock = availableValidationBlocks.includes(
+    selectedValidationBlock,
+  )
+    ? selectedValidationBlock
+    : availableValidationBlocks[0];
+  const activeValidationSql = activeValidationBlock
+    ? validationBlocks?.[activeValidationBlock] ?? null
+    : null;
+  const activeValidationPreview = React.useMemo(
+    () =>
+      activeValidationSql
+        ? truncateSqlPreview(activeValidationSql).previewSql
+        : null,
+    [activeValidationSql],
+  );
+  const isUpdateValidation =
+    operation === "UPDATE" && validationOptions !== undefined;
+
   return (
-    <Card className="h-full">
+    <Card className="flex h-full flex-col">
       <CardHeader className="grid gap-3 space-y-0 pb-4">
         <CardTitle className="text-base">SQL generado</CardTitle>
         <GenerationSummary
@@ -246,12 +275,20 @@ const SqlPreviewPanel = React.memo(function SqlPreviewPanel({
           generationMeta={generationMeta}
           updateMeta={updateMeta}
         />
-        {operation === "UPDATE" && validationOptions ? (
-          <UpdateValidationCopyButtons
-            fullSql={sql}
-            validationOptions={validationOptions}
-            validationBlocks={validationBlocks ?? null}
-          />
+        {isUpdateValidation ? (
+          <div className="flex flex-wrap gap-2 lg:justify-end">
+            {availableValidationBlocks.map((key) => (
+              <Button
+                key={key}
+                type="button"
+                size="sm"
+                variant={activeValidationBlock === key ? "default" : "secondary"}
+                onClick={() => setSelectedValidationBlock(key)}
+              >
+                Ver {validationBlockLabels[key]}
+              </Button>
+            ))}
+          </div>
         ) : (
           <div className="flex flex-col gap-1">
             <CopyButton text={sql} />
@@ -263,7 +300,7 @@ const SqlPreviewPanel = React.memo(function SqlPreviewPanel({
           </div>
         )}
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="flex flex-1 flex-col space-y-4">
         {operation === "DELETE" && (
           <div className="flex gap-3 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3">
             <AlertTriangle className="h-5 w-5 shrink-0 text-amber-400" />
@@ -293,17 +330,27 @@ const SqlPreviewPanel = React.memo(function SqlPreviewPanel({
             </div>
           </div>
         )}
-        <DataQualityReportPanel
-          quality={extractionQuality ?? null}
-          duplicates={extractionDuplicates}
-          removeDuplicates={removeDuplicates}
-          omittedDuplicates={omittedDuplicates}
-          sqlGeneratedCount={sqlGeneratedCount}
-        />
         {generationMeta?.isPreviewTruncated && (
           <PreviewSectionHeader generationMeta={generationMeta} />
         )}
-        <SqlPreview sql={sql} previewSql={previewSql} message={message} />
+        <SqlPreview
+          sql={isUpdateValidation ? activeValidationSql : sql}
+          previewSql={
+            isUpdateValidation ? activeValidationPreview : previewSql
+          }
+          message={message}
+          className={
+            isUpdateValidation
+              ? "min-h-[360px] flex-1 scrollbar-thin lg:min-h-[320px]"
+              : undefined
+          }
+        />
+        {isUpdateValidation && validationOptions && (
+          <UpdateValidationCopyButtons
+            validationOptions={validationOptions}
+            validationBlocks={validationBlocks ?? null}
+          />
+        )}
       </CardContent>
     </Card>
   );

@@ -49,6 +49,7 @@ function CompareOptionsPanel({
 }: CompareOptionsPanelProps) {
   const effectiveMode = mode === "auto" ? resolvedMode : mode;
   const showSqlOptions = effectiveMode === "sql";
+  const showTextOptions = effectiveMode === "text";
 
   return (
     <div className={cn("space-y-3", className)}>
@@ -62,6 +63,16 @@ function CompareOptionsPanel({
             onChange({ ...options, ignoreWhitespace: checked })
           }
         />
+        {showTextOptions && (
+          <OptionCheckbox
+            id="ignore-line-breaks"
+            label="Ignorar saltos de línea"
+            checked={options.ignoreLineBreaks}
+            onCheckedChange={(checked) =>
+              onChange({ ...options, ignoreLineBreaks: checked })
+            }
+          />
+        )}
         <OptionCheckbox
           id="ignore-empty-lines"
           label="Ignorar líneas vacías"
