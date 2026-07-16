@@ -37,6 +37,17 @@ WHERE id IN (
 'user-002'
 );`);
   });
+
+  it("conserva todos los registros en el SELECT de validación", () => {
+    const whereValues = Array.from({ length: 25 }, (_, index) =>
+      `user-${String(index + 1).padStart(3, "0")}`,
+    );
+    const sql = formatValidationSelect({ ...baseInput, whereValues });
+
+    expect(sql).toContain("'user-020'");
+    expect(sql).toContain("'user-025'");
+    expect(sql.match(/'user-\d{3}'/g)).toHaveLength(25);
+  });
 });
 
 describe("buildUpdateValidationBlocks", () => {
@@ -215,5 +226,21 @@ describe("composeUpdateValidationScript", () => {
     expect(result).toContain("WHERE id IN (");
     expect(result).toContain("-- 2 registros · UPDATE individual");
     expect(result!.match(/UPDATE users/g)?.length).toBe(2);
+  });
+
+  it("conserva todos los registros en el SELECT y en el UPDATE", () => {
+    const whereValues = Array.from({ length: 25 }, (_, index) =>
+      `user-${String(index + 1).padStart(3, "0")}`,
+    );
+    const input: SqlUpdateInput = { ...baseInput, whereValues };
+    const { sql: updateSql } = generateUpdate(input);
+    const blocks = buildUpdateValidationBlocks(
+      input,
+      updateSql,
+      DEFAULT_UPDATE_VALIDATION_OPTIONS,
+    );
+
+    expect(blocks?.preSelect).toContain("'user-025'");
+    expect(blocks?.update).toContain("'user-025'");
   });
 });

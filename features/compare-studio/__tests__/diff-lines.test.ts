@@ -17,7 +17,18 @@ describe("diffText", () => {
     const { lines } = diffText("a\nb", "a\nc");
     const output = formatDiffForCopy(lines);
 
+    expect(output).toContain("REPORTE DE COMPARACIÓN");
+    expect(output).toContain("[MODIFICADA] Original · línea 2 → Nueva versión · línea 2");
     expect(output).toContain("- b");
     expect(output).toContain("+ c");
+  });
+
+  it("incluye el lado y número de línea para altas y bajas", () => {
+    const { lines } = diffText("a\nb", "a\nc\nd");
+    const output = formatDiffForCopy(lines);
+
+    expect(output).toContain("Original · línea 2");
+    expect(output).toContain("Nueva versión · línea 2");
+    expect(output).toContain("[AGREGADA] Nueva versión · línea 3");
   });
 });

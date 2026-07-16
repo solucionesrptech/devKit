@@ -1,8 +1,3 @@
-export const MAX_VALID_RECORDS = 10_000;
-
-export const MAX_VALID_RECORDS_MESSAGE =
-  "El máximo permitido es 10000 registros.";
-
 export type ValueExtractionStats = {
   rowsDetected: number;
   validProcessed: number;
@@ -22,7 +17,6 @@ export type DataQualityReport = {
   uniqueValues: number;
   duplicateRecords: number;
   emptyRows: number;
-  omittedByLimit: number;
 };
 
 export type ValueExtractionResult = {
@@ -67,7 +61,6 @@ function buildQualityReport(
     uniqueValues,
     duplicateRecords: validRecords - uniqueValues,
     emptyRows,
-    omittedByLimit: 0,
   };
 }
 
@@ -118,19 +111,6 @@ export function extractValuesFromCells(
     valueRows,
   );
   const duplicates = buildDuplicatesList(valueRows);
-
-  if (allValid.length > MAX_VALID_RECORDS) {
-    return {
-      values: [],
-      quality: {
-        ...quality,
-        omittedByLimit: allValid.length - MAX_VALID_RECORDS,
-      },
-      duplicates,
-      stats: buildStats(quality, 0, 0),
-      error: MAX_VALID_RECORDS_MESSAGE,
-    };
-  }
 
   if (!options.removeDuplicates) {
     return {

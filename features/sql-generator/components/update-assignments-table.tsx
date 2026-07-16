@@ -61,6 +61,8 @@ function UpdateAssignmentsTable({
           <tbody>
             {rows.map((row) => {
               const isNullType = row.dataType === "null";
+              const isMissingColumn =
+                !row.column.trim() && (isNullType || Boolean(row.value.trim()));
 
               return (
                 <tr key={row.id} className="border-b border-border last:border-0">
@@ -73,6 +75,12 @@ function UpdateAssignmentsTable({
                         }
                         placeholder="is_locked"
                         aria-label="Columna SET"
+                        aria-invalid={isMissingColumn}
+                        className={
+                          isMissingColumn
+                            ? "border-amber-500 focus-visible:ring-amber-500"
+                            : undefined
+                        }
                       />
                     ) : (
                       <Select
@@ -81,8 +89,16 @@ function UpdateAssignmentsTable({
                           onRowChange(row.id, { column: value })
                         }
                       >
-                        <SelectTrigger aria-label="Columna SET">
-                          <SelectValue placeholder="Columna" />
+                        <SelectTrigger
+                          aria-label="Columna SET"
+                          aria-invalid={isMissingColumn}
+                          className={
+                            isMissingColumn
+                              ? "border-amber-500 focus-visible:ring-amber-500"
+                              : undefined
+                          }
+                        >
+                          <SelectValue placeholder="Selecciona columna" />
                         </SelectTrigger>
                         <SelectContent>
                           {presetColumns.map((column) => (
@@ -92,6 +108,11 @@ function UpdateAssignmentsTable({
                           ))}
                         </SelectContent>
                       </Select>
+                    )}
+                    {isMissingColumn && (
+                      <p className="mt-1.5 text-xs text-amber-400">
+                        Selecciona la columna que vas a actualizar.
+                      </p>
                     )}
                   </td>
                   <td className="px-3 py-2 align-top">

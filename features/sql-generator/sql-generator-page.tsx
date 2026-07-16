@@ -176,19 +176,8 @@ function SqlGeneratorPage() {
     return activeValues.length;
   }, [operation, activeWhereValues.length, activeValues.length]);
 
-  const activeExtractionStats =
-    operation === "UPDATE" ? updateExtraction.stats : inExtraction.stats;
-
   const activeExtractionQuality =
     operation === "UPDATE" ? updateExtraction.quality : inExtraction.quality;
-
-  const activeExtractionDuplicates =
-    operation === "UPDATE"
-      ? updateExtraction.duplicates
-      : inExtraction.duplicates;
-
-  const activeRemoveDuplicates =
-    operation === "UPDATE" ? removeDuplicatesUpdate : removeDuplicatesIn;
 
   const selectedPreset = React.useMemo(
     () => getSqlTablePreset(tablePresetId),
@@ -307,13 +296,9 @@ function SqlGeneratorPage() {
     updateValidationOptions,
   ]);
 
-  const sqlGeneratedCount =
-    result.generationMeta?.recordCount ??
-    result.updateMeta?.recordCount ??
-    undefined;
-
   return (
     <ToolWorkspace
+      className="lg:items-stretch"
       form={
         <SqlGeneratorForm
           operation={operation}
@@ -402,10 +387,6 @@ function SqlGeneratorPage() {
           }
           updateMeta={"updateMeta" in result ? result.updateMeta : undefined}
           extractionQuality={activeExtractionQuality}
-          extractionDuplicates={activeExtractionDuplicates}
-          sqlGeneratedCount={sqlGeneratedCount}
-          removeDuplicates={activeRemoveDuplicates}
-          omittedDuplicates={activeExtractionStats?.omittedDuplicates}
           validationOptions={
             operation === "UPDATE" ? updateValidationOptions : undefined
           }

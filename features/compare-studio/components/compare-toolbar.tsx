@@ -11,6 +11,7 @@ type CompareToolbarProps = {
   onClear: () => void;
   copyText: string | null;
   isComparing?: boolean;
+  showCompare?: boolean;
 };
 
 function CompareToolbar({
@@ -19,13 +20,16 @@ function CompareToolbar({
   onClear,
   copyText,
   isComparing = false,
+  showCompare = true,
 }: CompareToolbarProps) {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <Button type="button" onClick={onCompare} disabled={isComparing}>
-        <GitCompare className="h-4 w-4" />
-        Comparar
-      </Button>
+      {showCompare && (
+        <Button type="button" onClick={onCompare} disabled={isComparing}>
+          <GitCompare className="h-4 w-4" />
+          Comparar
+        </Button>
+      )}
       <Button type="button" variant="outline" onClick={onSwap}>
         <ArrowLeftRight className="h-4 w-4" />
         Intercambiar lados

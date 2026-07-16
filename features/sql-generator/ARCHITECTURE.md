@@ -95,9 +95,13 @@ Sección **Validación** en el formulario UPDATE con tres opciones (defaults: SE
 - `compose-update-validation.ts` — ensambla bloques con banners; **no modifica** `generateUpdate()`.
 - `GO` como separador solo en dialecto SQL Server.
 
-Los SELECT de validación siempre usan `WHERE IN` (bulk e individual). El UPDATE respeta el modo Automático o por fila sin cambios. No hay conexión a base de datos.
+Los SELECT de validación siempre usan `WHERE IN` (bulk e individual) y conservan exactamente todos los valores del UPDATE. Tanto los SELECT como el UPDATE se copian completos. Solo la vista previa visual se limita a los primeros 20 valores o sentencias para no saturar la interfaz. No hay conexión a base de datos.
 
-`buildUpdateValidationBlocks` expone cada bloque por separado para copia individual. `joinValidationBlocks` / copia completa incluye `GO` en SQL Server; los botones secundarios copian un solo bloque sin `GO`. Los botones visibles dependen de los checkboxes activos.
+`buildUpdateValidationBlocks` expone cada bloque por separado para copia individual. `joinValidationBlocks` mantiene el script compuesto, con `GO` en SQL Server. En la UI, los botones superiores alternan la visualización entre SELECT previo, UPDATE y SELECT posterior; los botones de copia aparecen debajo del preview y copian únicamente su bloque completo, sin `GO`. Los botones visibles dependen de los checkboxes activos.
+
+En desktop, las columnas del formulario y del resultado se estiran a la misma altura. El visor SQL ocupa el espacio restante y mantiene scroll interno. Así, listas grandes no alargan la columna de resultados ni rompen la simetría del workspace; este límite es exclusivamente visual. En pantallas pequeñas cada columna recupera su altura natural.
+
+El reporte de calidad de datos se muestra una sola vez, junto al origen de los datos en el formulario. El panel derecho se reserva para advertencias, navegación entre bloques, preview y acciones de copia.
 
 ## Entrada de datos UPDATE
 
@@ -122,18 +126,18 @@ UPDATE vive dentro del mismo módulo SQL Generator. **No** es una herramienta se
 
 Entrada por texto usa `useDebouncedValue` (300 ms) para parseo y preview, igual que SELECT/DELETE.
 
-### Listas grandes (hasta 10.000+ registros)
+### Listas grandes
 
 - **Sin límite** de registros procesados.
-- **SQL completo** en memoria para copiar; **preview truncado** en pantalla (50 sentencias o 50 líneas del `IN`).
+- **SQL completo** en memoria para copiar; **preview truncado** en pantalla (20 sentencias o 20 líneas del `IN`).
 - `truncate-sql-preview.ts` + `build-generation-result.ts` separan `sql` (completo) de `previewSql` (visible).
 - `generationMeta` expone: registros, tipo, tiempo (ms), si el preview fue limitado.
 - Listas ≥ 500 registros usan `useDeferredValue` para no bloquear la UI durante la generación.
 - `extractColumnValues` extrae columnas sin join/split intermedio; conserva duplicados por defecto.
-- **Reporte de calidad** siempre calculado: filas detectadas, válidos, únicos, duplicados, vacíos y omitidos por límite.
+- **Reporte de calidad** siempre calculado: filas detectadas, válidos, únicos, duplicados y vacíos.
 - Numeración de filas: texto 1-based; Excel fila 2 = primera fila de datos (fila 1 = encabezado).
 - Lista de duplicados con valor, cantidad y filas; botones **Ver duplicados** y **Descargar duplicados (.csv)**.
 - La herramienta **informa, no modifica** los datos; deduplicación solo con checkbox explícito.
 - Opción **Quitar duplicados** aplica deduplicación solo a los valores usados en el SQL.
-- Tope de **10.000** registros válidos; por encima muestra error sin generar SQL (reporte completo igual).
+- No existe un tope artificial de registros válidos. La capacidad práctica depende de la memoria disponible en el navegador; el preview permanece limitado y la copia conserva el SQL completo.
 - UPDATE en modo Automático genera un solo `WHERE IN` (óptimo para miles de registros).

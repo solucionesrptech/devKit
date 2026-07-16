@@ -142,7 +142,37 @@ export function diffLines(leftText: string, rightText: string): DiffLine[] {
   }
 
   result.reverse();
-  return result;
+
+  const merged: DiffLine[] = [];
+  for (const line of result) {
+    const previous = merged[merged.length - 1];
+
+    if (previous?.type === "remove" && line.type === "add") {
+      merged[merged.length - 1] = {
+        type: "modify",
+        leftLineNumber: previous.leftLineNumber,
+        rightLineNumber: line.rightLineNumber,
+        leftContent: previous.leftContent,
+        rightContent: line.rightContent,
+      };
+      continue;
+    }
+
+    if (previous?.type === "add" && line.type === "remove") {
+      merged[merged.length - 1] = {
+        type: "modify",
+        leftLineNumber: line.leftLineNumber,
+        rightLineNumber: previous.rightLineNumber,
+        leftContent: line.leftContent,
+        rightContent: previous.rightContent,
+      };
+      continue;
+    }
+
+    merged.push(line);
+  }
+
+  return merged;
 }
 
 export function diffText(leftText: string, rightText: string): {
@@ -157,20 +187,43 @@ export function diffText(leftText: string, rightText: string): {
 }
 
 export function formatDiffForCopy(lines: DiffLine[]): string {
-  const chunks: string[] = [];
+  const changes = lines.filter((line) => line.type !== "equal");
+  if (changes.length === 0) {
+    return "REPORTE DE COMPARACIÓN\n\nSin diferencias.";
+  }
 
-  for (const line of lines) {
-    if (line.type === "equal") continue;
+  const chunks: string[] = [
+    "REPORTE DE COMPARACIÓN",
+    `Diferencias encontradas: ${changes.length}`,
+    "",
+  ];
+
+  const displayContent = (content: string | undefined) =>
+    content?.length ? content : "(línea vacía)";
+
+  for (const line of changes) {
 
     if (line.type === "remove" && line.leftContent !== undefined) {
-      chunks.push(`- ${line.leftContent}`);
+      chunks.push(
+        `[ELIMINADA] Original · línea ${line.leftLineNumber ?? "?"}`,
+        `- ${displayContent(line.leftContent)}`,
+        "",
+      );
     } else if (line.type === "add" && line.rightContent !== undefined) {
-      chunks.push(`+ ${line.rightContent}`);
+      chunks.push(
+        `[AGREGADA] Nueva versión · línea ${line.rightLineNumber ?? "?"}`,
+        `+ ${displayContent(line.rightContent)}`,
+        "",
+      );
     } else if (line.type === "modify") {
-      chunks.push(`- ${line.leftContent ?? ""}`);
-      chunks.push(`+ ${line.rightContent ?? ""}`);
+      chunks.push(
+        `[MODIFICADA] Original · línea ${line.leftLineNumber ?? "?"} → Nueva versión · línea ${line.rightLineNumber ?? "?"}`,
+        `- ${displayContent(line.leftContent)}`,
+        `+ ${displayContent(line.rightContent)}`,
+        "",
+      );
     }
   }
 
-  return chunks.join("\n");
+  return chunks.join("\n").trim();
 }

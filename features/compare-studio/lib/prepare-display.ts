@@ -2,7 +2,7 @@ import type { CompareMode, CompareOptions } from "../types";
 
 import { formatXml } from "./compare-xml";
 import { prepareSqlForCompare } from "./compare-sql";
-import { splitLines } from "./normalize";
+import { normalizeTextForCompare } from "./normalize";
 
 export function prepareDisplayText(
   text: string,
@@ -30,21 +30,12 @@ export function prepareDisplayText(
     prepared = formatXml(prepared).formatted;
   }
 
-  let lines = splitLines(prepared);
+  const effectiveOptions = {
+    ...options,
+    ignoreLineBreaks: mode === "text" && options.ignoreLineBreaks,
+  };
 
-  if (options.ignoreEmptyLines) {
-    lines = lines.filter((line) => line.trim().length > 0);
-  }
-
-  if (options.ignoreCase) {
-    lines = lines.map((line) => line.toLowerCase());
-  }
-
-  if (options.ignoreWhitespace) {
-    lines = lines.map((line) => line.replace(/\s+/g, " ").trim());
-  }
-
-  return lines.join("\n");
+  return normalizeTextForCompare(prepared, effectiveOptions);
 }
 
 export function getDiffTexts(

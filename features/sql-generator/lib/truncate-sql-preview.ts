@@ -1,5 +1,5 @@
-export const PREVIEW_MAX_STATEMENTS = 50;
-export const PREVIEW_MAX_IN_LINES = 50;
+export const PREVIEW_MAX_STATEMENTS = 20;
+export const PREVIEW_MAX_IN_LINES = 20;
 
 export type TruncatePreviewResult = {
   previewSql: string;
@@ -21,7 +21,7 @@ function buildTruncationFooter(
 -- Preview limitado
 -- Se muestran los primeros ${shown} ${unit}.
 -- Quedan ${remaining} ${additional}.
--- Usa "Copiar SQL" para obtener el script completo.
+-- Usa los botones de copia para obtener cada bloque completo.
 
 ----------------------------------------`;
 }
@@ -38,7 +38,7 @@ function truncateInClause(
 
   const before = sql.slice(0, inStart + inMarker.length);
   const afterIn = sql.slice(inStart + inMarker.length);
-  const closingIdx = afterIn.lastIndexOf("\n);");
+  const closingIdx = afterIn.indexOf("\n);");
 
   if (closingIdx === -1) {
     return { previewSql: sql, isTruncated: false, previewStatementCount: 1 };
@@ -49,7 +49,11 @@ function truncateInClause(
   const lines = inBody.split("\n");
 
   if (lines.length <= maxLines) {
-    return { previewSql: sql, isTruncated: false, previewStatementCount: 1 };
+    return {
+      previewSql: sql,
+      isTruncated: false,
+      previewStatementCount: lines.length,
+    };
   }
 
   const remaining = lines.length - maxLines;
@@ -59,7 +63,7 @@ function truncateInClause(
   return {
     previewSql,
     isTruncated: true,
-    previewStatementCount: 1,
+    previewStatementCount: maxLines,
   };
 }
 

@@ -1,9 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { Pencil } from "lucide-react";
 import * as React from "react";
 import { toast } from "sonner";
 
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { CompareEditor } from "@/features/compare-studio/components/compare-editor";
 import { CompareListView } from "@/features/compare-studio/components/compare-list-view";
@@ -34,7 +36,7 @@ const CompareDiffView = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex min-h-[420px] items-center justify-center rounded-lg border border-border text-sm text-muted">
+      <div className="flex min-h-[600px] items-center justify-center rounded-lg border border-border text-sm text-muted">
         Cargando comparador visual…
       </div>
     ),
@@ -50,6 +52,9 @@ function getDebounceMs(left: string, right: string): number {
 }
 
 function ComparePage() {
+  const [workspaceView, setWorkspaceView] = React.useState<"edit" | "diff">(
+    "edit",
+  );
   const [mode, setMode] = React.useState<CompareMode>("auto");
   const [options, setOptions] =
     React.useState<CompareOptions>(DEFAULT_COMPARE_OPTIONS);
@@ -95,7 +100,10 @@ function ComparePage() {
   const handleCompare = () => {
     if (!leftText.trim() && !rightText.trim()) {
       toast.message("Agrega contenido en al menos un lado.");
+      return;
     }
+
+    setWorkspaceView("diff");
   };
 
   const handleSwap = () => {
@@ -112,6 +120,7 @@ function ComparePage() {
     setRightText("");
     setLeftFileName(undefined);
     setRightFileName(undefined);
+    setWorkspaceView("edit");
   };
 
   const handleLeftFileSelect = async (file: File) => {
@@ -144,20 +153,81 @@ function ComparePage() {
         onModeChange={setMode}
       />
 
-      <CompareEditor
-        leftSourceKind={leftSourceKind}
-        rightSourceKind={rightSourceKind}
-        leftText={leftText}
-        rightText={rightText}
-        leftFileName={leftFileName}
-        rightFileName={rightFileName}
-        onLeftSourceKindChange={setLeftSourceKind}
-        onRightSourceKindChange={setRightSourceKind}
-        onLeftTextChange={setLeftText}
-        onRightTextChange={setRightText}
-        onLeftFileSelect={handleLeftFileSelect}
-        onRightFileSelect={handleRightFileSelect}
-      />
+      {workspaceView === "edit" ? (
+        <CompareEditor
+          leftSourceKind={leftSourceKind}
+          rightSourceKind={rightSourceKind}
+          leftText={leftText}
+          rightText={rightText}
+          leftFileName={leftFileName}
+          rightFileName={rightFileName}
+          onLeftSourceKindChange={setLeftSourceKind}
+          onRightSourceKindChange={setRightSourceKind}
+          onLeftTextChange={setLeftText}
+          onRightTextChange={setRightText}
+          onLeftFileSelect={handleLeftFileSelect}
+          onRightFileSelect={handleRightFileSelect}
+        />
+      ) : (
+        <section className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Label>Comparación</Label>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setWorkspaceView("edit")}
+            >
+              <Pencil className="h-4 w-4" />
+              Editar contenido
+            </Button>
+          </div>
+
+          <CompareSummaryPanel result={result} />
+
+          {result?.kind === "list" && <CompareListView result={result} />}
+
+          {result && result.kind !== "list" && diffTexts && (
+            <>
+              {result.kind === "json" &&
+                (!result.isValidLeft || !result.isValidRight) && (
+                  <div className="space-y-1 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-muted">
+                    {!result.isValidLeft && (
+                      <p>JSON izquierdo inválido: {result.parseErrorLeft}</p>
+                    )}
+                    {!result.isValidRight && (
+                      <p>JSON derecho inválido: {result.parseErrorRight}</p>
+                    )}
+                  </div>
+                )}
+              {result.kind === "json" &&
+                (result.addedKeys.length > 0 ||
+                  result.removedKeys.length > 0) && (
+                  <div className="rounded-lg border border-border p-4 text-sm text-muted">
+                    {result.removedKeys.length > 0 && (
+                      <p>
+                        Propiedades eliminadas: {result.removedKeys.join(", ")}
+                      </p>
+                    )}
+                    {result.addedKeys.length > 0 && (
+                      <p>
+                        Propiedades agregadas: {result.addedKeys.join(", ")}
+                      </p>
+                    )}
+                  </div>
+                )}
+              <CompareDiffView
+                original={diffTexts.original}
+                modified={diffTexts.modified}
+                mode={resolvedMode}
+                leftFileName={leftFileName}
+                rightFileName={rightFileName}
+                ignoreWhitespace={options.ignoreWhitespace}
+              />
+            </>
+          )}
+        </section>
+      )}
 
       <CompareOptionsPanel
         mode={mode}
@@ -171,60 +241,9 @@ function ComparePage() {
         onSwap={handleSwap}
         onClear={handleClear}
         copyText={copyText}
+        showCompare={workspaceView === "edit"}
       />
 
-      <section className="space-y-4">
-        <Label>Resultado</Label>
-        <CompareSummaryPanel result={result} />
-
-        {result?.kind === "list" && <CompareListView result={result} />}
-
-        {result && result.kind !== "list" && diffTexts && (
-          <>
-            {result.kind === "json" &&
-              (!result.isValidLeft || !result.isValidRight) && (
-                <div className="space-y-1 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-muted">
-                  {!result.isValidLeft && (
-                    <p>JSON izquierdo inválido: {result.parseErrorLeft}</p>
-                  )}
-                  {!result.isValidRight && (
-                    <p>JSON derecho inválido: {result.parseErrorRight}</p>
-                  )}
-                </div>
-              )}
-            {result.kind === "json" &&
-              (result.addedKeys.length > 0 ||
-                result.removedKeys.length > 0) && (
-                <div className="rounded-lg border border-border p-4 text-sm text-muted">
-                  {result.removedKeys.length > 0 && (
-                    <p>
-                      Propiedades eliminadas: {result.removedKeys.join(", ")}
-                    </p>
-                  )}
-                  {result.addedKeys.length > 0 && (
-                    <p>
-                      Propiedades agregadas: {result.addedKeys.join(", ")}
-                    </p>
-                  )}
-                </div>
-              )}
-            <CompareDiffView
-              original={diffTexts.original}
-              modified={diffTexts.modified}
-              mode={resolvedMode}
-              leftFileName={leftFileName}
-              rightFileName={rightFileName}
-              ignoreWhitespace={options.ignoreWhitespace}
-            />
-          </>
-        )}
-
-        {!result && (
-          <div className="rounded-lg border border-dashed border-border p-8 text-center text-sm text-muted">
-            El resultado aparecerá aquí después de comparar.
-          </div>
-        )}
-      </section>
     </div>
   );
 }

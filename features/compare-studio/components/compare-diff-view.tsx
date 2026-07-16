@@ -39,8 +39,18 @@ function CompareDiffView({
   const [activeDiffIndex, setActiveDiffIndex] = React.useState(0);
   const [theme, setTheme] = React.useState(getDevKitMonacoTheme());
 
-  const language = getMonacoLanguage(mode, leftFileName, rightFileName);
-  const totalLines = Math.max(original.split("\n").length, 1);
+  const language = getMonacoLanguage(
+    mode,
+    leftFileName,
+    rightFileName,
+    original,
+    modified,
+  );
+  const totalLines = Math.max(
+    original.split("\n").length,
+    modified.split("\n").length,
+    1,
+  );
 
   React.useEffect(() => {
     const root = document.documentElement;
@@ -125,12 +135,26 @@ function CompareDiffView({
           <span className="inline-block h-2.5 w-2.5 rounded-sm bg-muted/40" />
           Sin cambios
         </span>
+        {mode === "code" && (
+          <span className="ml-auto rounded-md border border-border px-2 py-0.5 font-medium text-foreground">
+            Lenguaje: {language}
+          </span>
+        )}
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 px-2 text-xs font-medium text-muted">
+        <span className="truncate">
+          Original · izquierda{leftFileName ? ` · ${leftFileName}` : ""}
+        </span>
+        <span className="truncate">
+          Nueva versión · derecha{rightFileName ? ` · ${rightFileName}` : ""}
+        </span>
       </div>
 
       <div className="flex gap-2 overflow-hidden rounded-lg border border-border">
-        <div className="min-h-[420px] min-w-0 flex-1">
+        <div className="min-h-[600px] min-w-0 flex-1">
           <DiffEditor
-            height="420px"
+            height="clamp(600px, 78vh, 900px)"
             language={language}
             original={original}
             modified={modified}
@@ -144,8 +168,18 @@ function CompareDiffView({
               minimap: { enabled: false },
               scrollBeyondLastLine: false,
               wordWrap: "off",
+              diffWordWrap: "off",
+              wordWrapOverride1: "off",
+              wordWrapOverride2: "off",
               lineNumbers: "on",
+              renderIndicators: true,
+              renderMarginRevertIcon: false,
               renderOverviewRuler: false,
+              scrollbar: {
+                horizontal: "auto",
+                alwaysConsumeMouseWheel: false,
+              },
+              useInlineViewWhenSpaceIsLimited: true,
               automaticLayout: true,
             }}
           />

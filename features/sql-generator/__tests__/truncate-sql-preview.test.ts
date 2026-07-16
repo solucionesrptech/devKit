@@ -33,12 +33,38 @@ ${values}
 
     const result = truncateSqlPreview(sql);
     expect(result.isTruncated).toBe(true);
+    expect(result.previewStatementCount).toBe(PREVIEW_MAX_IN_LINES);
     expect(result.previewSql).toContain("-- Preview limitado");
     expect(result.previewSql).toContain(
       `-- Se muestran los primeros ${PREVIEW_MAX_IN_LINES} valores.`,
     );
     expect(result.previewSql).toContain("-- Quedan 10 valores adicionales.");
-    expect(result.previewSql).not.toContain("'id-59'");
+    expect(result.previewSql).toContain(`'id-${PREVIEW_MAX_IN_LINES - 1}'`);
+    expect(result.previewSql).not.toContain(`'id-${PREVIEW_MAX_IN_LINES}'`);
+  });
+
+  it("cuenta solo los valores del primer IN de un script compuesto", () => {
+    const values = Array.from({ length: 50 }, (_, i) => `'rut-${i}'`).join(
+      ",\n",
+    );
+    const sql = `SELECT *
+FROM Personas
+WHERE personaid IN (
+${values}
+);
+
+GO
+
+UPDATE Personas
+SET Eliminado = 1
+WHERE personaid IN (
+${values}
+);`;
+
+    const result = truncateSqlPreview(sql);
+
+    expect(result.previewSql).toContain("-- Quedan 30 valores adicionales.");
+    expect(result.previewSql).not.toContain("-- Quedan 93 valores adicionales.");
   });
 
   it("trunca múltiples sentencias UPDATE", () => {

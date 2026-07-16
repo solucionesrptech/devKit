@@ -1,6 +1,7 @@
 export type CompareMode =
   | "auto"
   | "list"
+  | "text"
   | "code"
   | "sql"
   | "json"
@@ -77,8 +78,8 @@ export type CompareResult =
   | JsonCompareResult;
 
 export const DEFAULT_COMPARE_OPTIONS: CompareOptions = {
-  ignoreWhitespace: true,
-  ignoreEmptyLines: true,
+  ignoreWhitespace: false,
+  ignoreEmptyLines: false,
   ignoreLineBreaks: false,
   ignoreCase: false,
   ignoreSqlComments: false,

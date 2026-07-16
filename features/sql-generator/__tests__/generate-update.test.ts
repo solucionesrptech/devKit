@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { formatAssignmentValue } from "../lib/format-sql-value";
 import { generateUpdate } from "../lib/generate-update";
+import { generateUpdateSql } from "../lib/generate-update-sql";
 import { validateUpdateInput } from "../lib/validate-update-input";
 import type { SqlUpdateInput } from "../types";
 
@@ -150,5 +151,30 @@ WHERE id IN (
     const sqlServer = generateUpdate({ ...baseInput, dialect: "sqlserver" });
     const postgres = generateUpdate({ ...baseInput, dialect: "postgresql" });
     expect(postgres.sql).toBe(sqlServer.sql);
+  });
+});
+
+describe("generateUpdateSql", () => {
+  it("limita solo el preview y conserva 1000 IDs en cada bloque copiable", () => {
+    const whereValues = Array.from({ length: 1000 }, (_, index) =>
+      `user-${String(index + 1).padStart(4, "0")}`,
+    );
+    const result = generateUpdateSql({
+      ...baseInput,
+      whereValues,
+      assignments: [{ column: "is_locked", value: "1", dataType: "number" }],
+      validationOptions: {
+        includePreSelect: true,
+        includeUpdate: true,
+        includePostSelect: true,
+      },
+    });
+
+    expect(result.generationMeta?.isPreviewTruncated).toBe(true);
+    expect(result.previewSql).toContain("-- Se muestran los primeros 20 valores.");
+    expect(result.previewSql).not.toContain("'user-1000'");
+    expect(result.validationBlocks?.preSelect).toContain("'user-1000'");
+    expect(result.validationBlocks?.update).toContain("'user-1000'");
+    expect(result.validationBlocks?.postSelect).toContain("'user-1000'");
   });
 });

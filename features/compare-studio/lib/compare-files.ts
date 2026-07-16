@@ -9,9 +9,9 @@ const EXTENSION_MODE_MAP: Record<string, string> = {
   ".ts": "code",
   ".tsx": "code",
   ".jsx": "code",
-  ".txt": "code",
-  ".md": "code",
-  ".log": "code",
+  ".txt": "text",
+  ".md": "text",
+  ".log": "text",
   ".csv": "list",
 };
 

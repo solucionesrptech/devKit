@@ -6,6 +6,7 @@ import type { CompareMode } from "@/features/compare-studio/types";
 
 const MODE_OPTIONS: { value: CompareMode; label: string }[] = [
   { value: "list", label: "Lista" },
+  { value: "text", label: "Texto" },
   { value: "code", label: "Código" },
   { value: "sql", label: "SQL" },
   { value: "json", label: "JSON" },

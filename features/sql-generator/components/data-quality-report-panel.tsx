@@ -59,12 +59,6 @@ function DataQualityReportPanel({
         <StatCard label="Valores únicos" value={quality.uniqueValues} />
         <StatCard label="Duplicados" value={quality.duplicateRecords} />
         <StatCard label="Filas vacías" value={quality.emptyRows} />
-        {quality.omittedByLimit > 0 && (
-          <StatCard
-            label="Omitidos por límite"
-            value={quality.omittedByLimit}
-          />
-        )}
         {removeDuplicates && (
           <StatCard label="Duplicados omitidos" value={omittedDuplicates} />
         )}

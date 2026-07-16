@@ -4,6 +4,7 @@ import {
   composeUpdateValidationScript,
 } from "./compose-update-validation";
 import { generateUpdate } from "./generate-update";
+import { truncateSqlPreview } from "./truncate-sql-preview";
 import { validateUpdateInput } from "./validate-update-input";
 import {
   DEFAULT_UPDATE_VALIDATION_OPTIONS,
@@ -68,9 +69,25 @@ export function generateUpdateSql(input: SqlUpdateInput): SqlGeneratorResult {
     },
     startTime,
   );
+  const initialPreviewSql =
+    validationBlocks?.preSelect ??
+    validationBlocks?.update ??
+    validationBlocks?.postSelect ??
+    fullSql;
+  const initialPreview = truncateSqlPreview(initialPreviewSql);
 
   return {
     ...result,
+    previewSql: initialPreview.isTruncated
+      ? initialPreview.previewSql
+      : undefined,
+    generationMeta: result.generationMeta
+      ? {
+          ...result.generationMeta,
+          isPreviewTruncated: initialPreview.isTruncated,
+          previewStatementCount: initialPreview.previewStatementCount,
+        }
+      : undefined,
     validationBlocks,
     updateMeta: {
       recordCount: input.whereValues.length,
