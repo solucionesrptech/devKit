@@ -20,7 +20,7 @@ function UpdateValidationCopyButtons({
       <div className="flex flex-wrap gap-2 lg:justify-end">
         {validationOptions.includePreSelect && (
           <CopyButton
-            text={validationBlocks?.preSelect}
+            text={validationBlocks?.preSelect ?? null}
             label="Copiar SELECT previo"
             successMessage="SELECT previo copiado al portapapeles"
             variant="secondary"
@@ -28,7 +28,7 @@ function UpdateValidationCopyButtons({
         )}
         {validationOptions.includeUpdate && (
           <CopyButton
-            text={validationBlocks?.update}
+            text={validationBlocks?.update ?? null}
             label="Copiar UPDATE"
             successMessage="UPDATE copiado al portapapeles"
             variant="secondary"
@@ -36,7 +36,7 @@ function UpdateValidationCopyButtons({
         )}
         {validationOptions.includePostSelect && (
           <CopyButton
-            text={validationBlocks?.postSelect}
+            text={validationBlocks?.postSelect ?? null}
             label="Copiar SELECT posterior"
             successMessage="SELECT posterior copiado al portapapeles"
             variant="secondary"
